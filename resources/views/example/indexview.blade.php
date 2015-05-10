@@ -10,8 +10,6 @@
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
 
-	@yield('css')
-
 	<!-- Fonts -->
 
 	
@@ -24,24 +22,54 @@
 	<![endif]-->
 </head>
 <body>
-	@include('template.header')
-	
-	<div class="container">
-		@yield('content')
-	</div>
-	
-	@include('template.footer')
+
+
+	@include('example.partitions.Navbar')
+
+		<div class="container">
+				@include('example.partitions.Badges')
+
+				<br><br><hr><br><br>
+
+				@include('example.partitions.Buttons')
+				
+				<br><br><hr><br><br>
+
+				@include('example.partitions.Cards')
+
+				
+				<br><br><hr><br><br>
+				
+				@include('example.partitions.Collections')
+
+				<br><br><hr><br><br>
+
+				@include('example.partitions.Forms')
+
+				<br><br><hr><br><br>
+
+				@include('example.partitions.Icons')
+
+				<br><br><hr><br><br>
+
+				@include('example.partitions.Pagination')
+
+				<br><br><hr><br><br>
+
+				@include('example.partitions.Preloader')
+		</div>
+
+	@include('example.partitions.Footer')
+
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
-
+    
 	<!-- El siguiente codigo inicia el menu movil -->
     <script type="text/javascript">
     	$(".button-collapse").sideNav();
     </script>
-
-    @yield('scripts')
 </body>
 </html>

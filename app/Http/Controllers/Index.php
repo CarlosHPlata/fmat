@@ -17,14 +17,6 @@ class Index extends Controller {
 	 */
 	public function index()
 	{
-		$user = Teacher::findOrFail(8);
-		
-
-		return dd(
-			$user->resources->toarray(), 
-			$user->signatures->toarray(),
-			$user->signatures->first()->toarray(),
-			$user->getSignaturesResources($user->signatures->first())->toarray()
-		);
+		return \View::make('index');
 	}
 }

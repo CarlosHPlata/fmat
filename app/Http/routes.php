@@ -13,3 +13,7 @@
 
 Route::get('/', 'Index@index');
 
+Route::get('/template', function(){
+	return view('example.indexview');
+});
+

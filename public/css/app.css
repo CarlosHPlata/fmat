@@ -897,11 +897,6 @@ a {
   color: #337ab7;
   text-decoration: none;
 }
-a:hover,
-a:focus {
-  color: #23527c;
-  text-decoration: underline;
-}
 a:focus {
   outline: thin dotted;
   outline: 5px auto -webkit-focus-ring-color;
@@ -4331,13 +4326,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > a,
 .pagination > li > span {
   position: relative;
-  float: left;
-  padding: 6px 12px;
   line-height: 1.42857143;
-  text-decoration: none;
-  color: #337ab7;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
   margin-left: -1px;
 }
 .pagination > li:first-child > a,
@@ -4351,14 +4340,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
 }
-.pagination > li > a:hover,
-.pagination > li > span:hover,
-.pagination > li > a:focus,
-.pagination > li > span:focus {
-  color: #23527c;
-  background-color: #eeeeee;
-  border-color: #dddddd;
-}
 .pagination > .active > a,
 .pagination > .active > span,
 .pagination > .active > a:hover,
@@ -4366,9 +4347,6 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
   z-index: 2;
-  color: #ffffff;
-  background-color: #337ab7;
-  border-color: #337ab7;
   cursor: default;
 }
 .pagination > .disabled > span,
@@ -4528,8 +4506,6 @@ a.label:focus {
   vertical-align: baseline;
   white-space: nowrap;
   text-align: center;
-  background-color: #777777;
-  border-radius: 10px;
 }
 .badge:empty {
   display: none;
@@ -6226,8 +6202,22 @@ button.close {
     display: none !important;
   }
 }
-body,
-label,
-.checkbox label {
-  font-weight: 300;
+.nav-wrapper{
+    padding-left: 10%;
+  padding-right: 10%;
+}
+.navbar-title{
+  background: #ff8a80;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.buttons-login{
+    padding-top: 15px;
+}
+.buttons-login a, .buttons-login a:hover{
+  box-shadow: none;
+  border: 1px solid #F29174;
+}
+nav ul li.find:hover, nav ul li.find.active{
+  background-color: rgba(0,0,0,0) !important;
 }
