@@ -1,23 +1,3 @@
-<!--<div class="navbar-title">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<h4><a href="#!" class="brand-logo" style="color:white;">Lis Fmat Wiki</a></h4>
-			</div>
-			<div class="col-md-8 pull-right">
-				<div class="buttons-login pull-right">
-					@if (Auth::guest())
-						<a class="waves-effect waves-teal btn-flat btn-large">Iniciar Sesion</a>
-						<a class="waves-effect waves-light btn deep-orange accent-1 btn-large"><i class="mdi-action-account-circle left "></i>Registrate</a>
-					@else
-
-					@endif
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
-
 <div class="navbar-fixed">
     <nav class="white">
       <div class="nav-wrapper">
