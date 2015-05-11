@@ -10,4 +10,8 @@ class Link extends Model {
 		return $this->belongsTo('App\Signature');
 	}
 
+	public function setSignatureAttribute($signature){
+		$this->signature_id = $signature->id;
+	}
+
 }

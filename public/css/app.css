@@ -883,7 +883,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #ffffff;
+  background-color: #F6F4F1!important;
 }
 input,
 button,
@@ -6203,7 +6203,7 @@ button.close {
   }
 }
 .nav-wrapper{
-    padding-left: 10%;
+    padding-left: 17%;
   padding-right: 10%;
 }
 .navbar-title{
@@ -6220,4 +6220,10 @@ button.close {
 }
 nav ul li.find:hover, nav ul li.find.active{
   background-color: rgba(0,0,0,0) !important;
+}
+.input-field input[type=search]:focus {
+  background-color: #00bfa5 !important;
+  border: 0;
+  box-shadow: none;
+  color: #444;
 }

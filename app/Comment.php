@@ -16,4 +16,8 @@ class Comment extends Model {
 		return $this->belongsTo('App\User');
 	}
 
+	public function setUserAttribute($user){
+		$this->user_id = $user->id;
+	}
+
 }

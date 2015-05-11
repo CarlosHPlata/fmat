@@ -30,4 +30,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->first_name . ' ' . $this->last_name;
 	}
 
+	public function ratings(){
+		return $this->hasMany('App\Rating');
+	}
+
 }

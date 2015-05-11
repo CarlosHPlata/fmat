@@ -17,3 +17,10 @@ Route::get('/template', function(){
 	return view('example.indexview');
 });
 
+Route::get('/prueba', 'Index@prueba');
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+

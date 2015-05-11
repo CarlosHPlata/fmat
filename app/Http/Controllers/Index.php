@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Teacher;
 use App\User;
+use App\Rating;
 
 class Index extends Controller {
 
@@ -18,5 +19,13 @@ class Index extends Controller {
 	public function index()
 	{
 		return \View::make('index');
+	}
+
+	public function prueba(){
+		$rating = Rating::find(2);
+		$teacher = $rating->teacher;
+		$teacher->rating;
+
+		return dd($rating->toArray(), $teacher->rating);
 	}
 }
