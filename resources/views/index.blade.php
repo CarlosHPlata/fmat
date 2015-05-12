@@ -28,13 +28,60 @@
 		</div>
 	</div>
 
+	<div class="card white">
+		<div class="card-content">
+			<span class="card-title brown-text text-lighten-1">Nuevo Semestre por venir</span>
+			<p>
+				Pronto vendra el nuevo semestre y se actualizara el contenido de la pagina, los ratings de los maestros
+				seran reseteados para ser votados nuevamente.
+			</p>
+		</div>
+	</div>
+
+	<div class="card white">
+		<div class="card-content">
+			<span class="card-title brown-text text-lighten-1">Nuevo Semestre por venir</span>
+			<p>
+				Pronto vendra el nuevo semestre y se actualizara el contenido de la pagina, los ratings de los maestros
+				seran reseteados para ser votados nuevamente.
+			</p>
+		</div>
+	</div>
+
+	
+
 	<div class="row">
 		<div class="col-md-6">
 			<div class="card white">
 				<div class="card-content">
 					<span class="card-title brown-text text-lighten-1">Maestros mejor votados</span>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis atque sequi unde eum nobis dolorem reprehenderit, sunt, est corrupti itaque delectus tempora labore corporis nihil rerum obcaecati, excepturi minima consectetur!
+						<ul class="collection">
+						    <a class="collection-item" href=""> 
+						    	<div> 
+						    		Alvin
+						    		<span href="#!" class="secondary-content">
+						    			5<i class="mdi-action-grade"></i>
+						    		</span>
+						    	</div> 
+						    </a>
+						    <a class="collection-item" href=""> 
+						    	<div> 
+						    		Alvin
+						    		<span href="#!" class="secondary-content">
+						    			5<i class="mdi-action-grade"></i>
+						    		</span>
+						    	</div> 
+						    </a>
+						    <a class="collection-item" href=""> 
+						    	<div> 
+						    		Alvin
+						    		<span href="#!" class="secondary-content">
+						    			5<i class="mdi-action-grade"></i>
+						    		</span>
+						    	</div> 
+						    </a>
+						</ul>
 					</p>
 				</div>
 			</div>
@@ -44,7 +91,32 @@
 				<div class="card-content">
 					<span class="card-title brown-text text-lighten-1">Materias con mas recursos</span>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat magni, incidunt quia commodi architecto amet eligendi voluptatem nostrum ab aliquam fuga provident non alias accusantium corrupti ullam libero laboriosam harum.
+						<ul class="collection">
+						    <a class="collection-item" href=""> 
+						    	<div> 
+						    		Alvin
+						    		<span href="#!" class="secondary-content">
+						    			5<i class="mdi-editor-attach-file"></i>
+						    		</span>
+						    	</div> 
+						    </a>
+						    <a class="collection-item" href=""> 
+						    	<div> 
+						    		Alvin
+						    		<span href="#!" class="secondary-content">
+						    			5<i class="mdi-editor-attach-file"></i>
+						    		</span>
+						    	</div> 
+						    </a>
+						    <a class="collection-item" href=""> 
+						    	<div> 
+						    		Alvin
+						    		<span href="#!" class="secondary-content">
+						    			5<i class="mdi-editor-attach-file"></i>
+						    		</span>
+						    	</div> 
+						    </a>
+						</ul>
 					</p>
 				</div>
 			</div>
