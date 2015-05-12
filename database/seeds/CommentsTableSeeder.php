@@ -14,7 +14,7 @@ class CommentsTableSeeder extends Seeder {
 				'anonymous'			=> $faker->boolean,
 				
 				'commentable_id'	=> $faker->numberBetween(1, 9),
-				'commentable_type'	=> $faker->randomElement(['App\Signature','App\Teacher']),
+				'commentable_type'	=> $faker->randomElement(['App\Signature','App\Teacher', 'App\Bulletin']),
 
 				'user_id'	=> $faker->numberBetween(1, 9),
 			));

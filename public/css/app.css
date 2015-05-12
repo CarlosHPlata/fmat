@@ -6227,3 +6227,11 @@ nav ul li.find:hover, nav ul li.find.active{
   box-shadow: none;
   color: #444;
 }
+.background.programmer{
+  background: url('../images/index-background.jpg');
+    background-size: cover;
+}
+.card-date{
+  font-size: 10px;
+  opacity: .5;
+}

@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('LinkTableSeeder');
 		$this->call('ResourcesTableSeeder');
 		$this->call('CommentsTableSeeder');
+		$this->call('RatingsTableSeeder');
+		$this->call('BulletinsTableSeeder');
 	}
 
 }

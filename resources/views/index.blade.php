@@ -1,11 +1,15 @@
 @extends('app')
 
 @section('content')
-	<div class="card blue-grey darken-1">
+	<div class="card background programmer">
 	  <div class="card-content white-text">
 	    	<span class="card-title">Bienvenido a LisFmat Wiki</span>
 	    	<p>Un espacio para compartir opiniones y materiales de estudio, relacionados a las clases que
-	    	se imparten en la carrera LIS de Fmat.</p>
+	    	se imparten en la carrera LIS de Fmat.
+	    	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima ullam explicabo minus debitis dicta possimus itaque, perferendis, consectetur reiciendis praesentium sapiente unde sunt repellendus odit incidunt perspiciatis facilis? Molestiae, officia.</p>
+	    	<p>
+	    		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum laboriosam, cumque maiores cum officiis natus. Quaerat sapiente maiores deleniti, suscipit repellendus magnam. Repellendus dicta, ratione itaque, placeat hic aliquam expedita.
+	    	</p>
 	  </div>
 
 	  <div class="card-action">
@@ -18,35 +22,37 @@
 	  </div>
 	</div>
 
-	<div class="card white">
-		<div class="card-content">
-			<span class="card-title brown-text text-lighten-1">Nuevo Semestre por venir</span>
-			<p>
-				Pronto vendra el nuevo semestre y se actualizara el contenido de la pagina, los ratings de los maestros
-				seran reseteados para ser votados nuevamente.
-			</p>
-		</div>
-	</div>
+	<section>
+		<hr>
+		<h4>Noticias</h4>
+		
+		@foreach ($bulletins as $bulletin)
+			<div class="card white">
+				<div class="card-content">
+					<span class="card-title brown-text text-lighten-1">{{ $bulletin->title }}</span>
+					<p>
+						{{ $bulletin->content }}
+					</p>
+					<span class="card-date">{{ $bulletin->date }}</span>
+				</div>
+				<div class="card-action" style="padding:10px">
+					<div class="row" style="margin-bottom: 0">
+						<div class="col-md-6">
+							<a href="">Ver mas...</a>
+						</div>
+						<div class="col-md-6">
+							<span class="pull-right">{{ count($bulletin->comments) }} <i class="mdi-editor-mode-comment"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>	
+		@endforeach
 
-	<div class="card white">
-		<div class="card-content">
-			<span class="card-title brown-text text-lighten-1">Nuevo Semestre por venir</span>
-			<p>
-				Pronto vendra el nuevo semestre y se actualizara el contenido de la pagina, los ratings de los maestros
-				seran reseteados para ser votados nuevamente.
-			</p>
+		<div>
+			<span class="pull-right"><a href="">Ver mas</a></span> <br>
+			<hr>
 		</div>
-	</div>
-
-	<div class="card white">
-		<div class="card-content">
-			<span class="card-title brown-text text-lighten-1">Nuevo Semestre por venir</span>
-			<p>
-				Pronto vendra el nuevo semestre y se actualizara el contenido de la pagina, los ratings de los maestros
-				seran reseteados para ser votados nuevamente.
-			</p>
-		</div>
-	</div>
+	</section>
 
 	
 
@@ -54,33 +60,19 @@
 		<div class="col-md-6">
 			<div class="card white">
 				<div class="card-content">
-					<span class="card-title brown-text text-lighten-1">Maestros mejor votados</span>
+					<span class="card-title brown-text text-lighten-1">TOP 10 Maestros mejor votados</span>
 					<p>
 						<ul class="collection">
-						    <a class="collection-item" href=""> 
-						    	<div> 
-						    		Alvin
-						    		<span href="#!" class="secondary-content">
-						    			5<i class="mdi-action-grade"></i>
-						    		</span>
-						    	</div> 
-						    </a>
-						    <a class="collection-item" href=""> 
-						    	<div> 
-						    		Alvin
-						    		<span href="#!" class="secondary-content">
-						    			5<i class="mdi-action-grade"></i>
-						    		</span>
-						    	</div> 
-						    </a>
-						    <a class="collection-item" href=""> 
-						    	<div> 
-						    		Alvin
-						    		<span href="#!" class="secondary-content">
-						    			5<i class="mdi-action-grade"></i>
-						    		</span>
-						    	</div> 
-						    </a>
+							@foreach ($teachers as $teacher)
+								<a class="collection-item" href=""> 
+									<div> 
+										{{ $teacher->full_name }}
+										<span href="#!" class="secondary-content">
+											{{$teacher->rating}}<i class="mdi-action-grade"></i>
+										</span>
+									</div> 
+								</a>
+							@endforeach
 						</ul>
 					</p>
 				</div>
@@ -89,33 +81,19 @@
 		<div class="col-md-6">
 			<div class="card white">
 				<div class="card-content">
-					<span class="card-title brown-text text-lighten-1">Materias con mas recursos</span>
+					<span class="card-title brown-text text-lighten-1">TOP 10 Materias con mas recursos</span>
 					<p>
 						<ul class="collection">
-						    <a class="collection-item" href=""> 
-						    	<div> 
-						    		Alvin
-						    		<span href="#!" class="secondary-content">
-						    			5<i class="mdi-editor-attach-file"></i>
-						    		</span>
-						    	</div> 
-						    </a>
-						    <a class="collection-item" href=""> 
-						    	<div> 
-						    		Alvin
-						    		<span href="#!" class="secondary-content">
-						    			5<i class="mdi-editor-attach-file"></i>
-						    		</span>
-						    	</div> 
-						    </a>
-						    <a class="collection-item" href=""> 
-						    	<div> 
-						    		Alvin
-						    		<span href="#!" class="secondary-content">
-						    			5<i class="mdi-editor-attach-file"></i>
-						    		</span>
-						    	</div> 
-						    </a>
+							@foreach ($signatures as $signature)
+								<a class="collection-item" href=""> 
+									<div> 
+										{{ $signature->name }}
+										<span href="#!" class="secondary-content">
+										 	{{ count($signature->resources) }}<i class="mdi-editor-attach-file"></i>
+										</span>
+									</div> 
+								</a>
+							@endforeach
 						</ul>
 					</p>
 				</div>

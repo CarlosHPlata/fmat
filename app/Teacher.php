@@ -31,6 +31,10 @@ class Teacher extends Model {
     			->get();
     }
 
+    public function getFullNameAttribute(){
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     public function getRatingAttribute(){
         $count = 0;
         $value = 0;
@@ -38,7 +42,9 @@ class Teacher extends Model {
             $value += $rating->rate;
             $count++;
         }
-        return $value/$count;
+        $final = ($count == 0)?0:$value/$count;
+        $final = number_format($final, 1, '.', '');
+        return $final;
     }
 
 }
