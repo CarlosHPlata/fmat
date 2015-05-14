@@ -34,4 +34,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('App\Rating');
 	}
 
+	public function isLevel($level){
+		switch ($level) {
+			case 'user':
+				return true;
+			case 'admin':
+				if ($this->type === 'admin') return true;
+				if ($this->type === 'superadmin') return true;
+				break;
+			case 'superadmin':
+				if ($this->type === 'superadmin') return true;
+				break;
+		}
+
+		return false;
+	}
+
 }

@@ -34,8 +34,6 @@ class Index extends Controller {
 		return dd($rating->toArray(), $teacher->rating);
 	}
 
-
-
 	private function getBestTeachers(){
 		$teachers = Teacher::get();
 		$arrayTeacher = array();

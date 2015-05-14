@@ -26,8 +26,22 @@
 <body>
 	@include('template.header')
 	
-	<div class="container">
-		@yield('content')
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-9 col-md-offset-1">
+				@yield('content')
+			</div>
+			<div class="col-md-2">
+				<ul class="section table-of-contents" style="position: fixed;">
+	            	<li><a href="#introduction" class="">Introducción</a></li>
+	            	<li><a href="#structure" class="active">Structure</a></li>
+	            	<li><a href="#initialization">Intialization</a></li>
+	            	<li><a href="#options">Plugin Options</a></li>
+	            	<li><a href="#method">Methods</a></li>
+	            	<li><a href="#variations">Variations</a></li>
+	          </ul>
+			</div>
+		</div>
 	</div>
 	
 	@include('template.footer')
@@ -39,6 +53,7 @@
 
 	<!-- El siguiente codigo inicia el menu movil -->
     <script type="text/javascript">
+    	$(".button-collapse").sideNav();
     	$(".button-collapse").sideNav();
     </script>
 

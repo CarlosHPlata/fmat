@@ -1,12 +1,12 @@
 <div class="navbar-fixed">
     <nav class="white">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo teal-text text-accent-4">Logo</a>
+        <a href="{{ url('/') }}" class="brand-logo teal-text text-accent-4">Logo</a>
 		    <a href="#" data-activates="mobile-demo" class="button-collapse teal-text text-lighten-1"><i class="mdi-navigation-menu"></i></a>
 
         <ul class="right hide-on-med-and-down">
           <li><a href="#" class="teal-text text-lighten-1">Materias</a></li>
-         	<li><a href="#" class="teal-text text-lighten-1">Maestros</a></li>
+         	<li><a href="{{ route('teacher.index') }}" class="teal-text text-lighten-1">Maestros</a></li>
           <li class="find">
             <form>
                 <div class="input-field">
@@ -19,7 +19,7 @@
         </ul>
         <ul class="side-nav" id="mobile-demo">
             <li><a href="sass.html" class="teal-text text-accent-4" >Materias</a></li>
-          	<li><a href="components.html" class="teal-text text-accent-4" >Maestros</a></li>
+          	<li><a href="{{ route('teacher.index') }}" class="teal-text text-accent-4" >Maestros</a></li>
           	<li>
           		<form>
           		    <div class="input-field">
