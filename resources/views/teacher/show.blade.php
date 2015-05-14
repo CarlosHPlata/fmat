@@ -33,7 +33,7 @@
 	        	<center>
 	        		<div id="stars-existing" class="starrr" data-rating='{{ceil($teacher->rating)}}'></div>
 	        		<i class="mdi-social-person"></i> {{count($teacher->ratings)}}
-	        		<a href="{{}"></a>
+	        		<a style="display:none;" id="rating-a" data-id="{{ $teacher->id }}" href="{{ route('rating', ['variable', 'teacher']) }}"></a>
 	        	</center>
 	        </div>
 
@@ -59,6 +59,31 @@
 	        <hr>
 	        <div class="row">
 	        	<h4>Materias</h4>
+	        	<div class="col-md-12">
+		            <ul class="collapsible" data-collapsible="expandable">
+		            	@foreach ($teacher->signatures as $signature)
+							<li class="">
+							  	<div class="collapsible-header"><i class="mdi-action-class"></i> {{ $signature->name }} </div>
+							  	<div class="collapsible-body" style="display: none;">
+							  		<table class="table">
+							  			<thead>
+							  				<th>Recursos</th>
+							  			</thead>
+							  			<tbody>
+							  				@foreach ($teacher->getSignaturesResources($signature) as $resource)
+												<tr>
+													<td>
+														<p>{{$resource->name}}</p>
+													</td>
+												</tr>
+							  				@endforeach
+							  			</tbody>
+							  		</table>
+							  	</div>
+							</li>
+		            	@endforeach
+		            </ul>
+	          	</div>
 	        </div>
 		</div>
 	</div>

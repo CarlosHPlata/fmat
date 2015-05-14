@@ -43,7 +43,10 @@ var __slice = [].slice;
 
             _results = [];
             for (_i = 1, _ref = this.options.numStars; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--) {
-                _results.push(this.$el.append("<i class='fa mdi-action-grade off'></i>"));
+                var str = $('#rating-a').attr('href');
+                    str = str.replace('variable', _i)
+                    str = str.replace('teacher', $('#rating-a').attr('data-id'));
+                _results.push(this.$el.append('<a href="'+str+'"><i class="fa mdi-action-grade off"></i></a>'));
             }
             return _results;
         };

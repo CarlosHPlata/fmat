@@ -55,6 +55,11 @@
     <script type="text/javascript">
     	$(".button-collapse").sideNav();
     	$(".button-collapse").sideNav();
+    	$(function(){
+    		$( ".toast" ).each(function( index ) {
+    			Materialize.toast($(this).val(), 4000)
+    		});
+    	});
     </script>
 
     @yield('scripts')

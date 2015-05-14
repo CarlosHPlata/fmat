@@ -28,7 +28,10 @@ Route::resource('teacher', 'TeacherController');
 Route::get('/prueba', 'Index@prueba');
 
 
-Route::get('/rate');
+Route::get('/rate/{rating}/{teacher}', [
+	'as' 	=> 'rating',
+	'uses' 	=> 'TeacherController@rate'
+]);
 
 
 

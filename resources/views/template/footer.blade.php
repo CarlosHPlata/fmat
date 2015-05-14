@@ -23,3 +23,9 @@
         	</div>
         </div>
     </footer>
+
+    <div style="display:none;">
+      @if (Session::has('message'))
+        <input type="hidden" class="toast" value="{{ Session::get('message') }}">
+      @endif
+    </div>
