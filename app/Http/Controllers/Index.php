@@ -26,13 +26,6 @@ class Index extends Controller {
 		return view('index', compact('bulletins', 'teachers', 'signatures'));
 	}
 
-	public function prueba(){
-		$rating = Rating::find(2);
-		$teacher = $rating->teacher;
-		$teacher->rating;
-
-		return dd($rating->toArray(), $teacher->rating);
-	}
 
 	private function getBestTeachers(){
 		$teachers = Teacher::get();
