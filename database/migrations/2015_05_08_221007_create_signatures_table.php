@@ -16,6 +16,7 @@ class CreateSignaturesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name')->unique();
+			$table->text('description');
 			$table->integer('credits');
 			$table->integer('semester');
 			$table->boolean('required');

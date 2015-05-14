@@ -6,7 +6,7 @@ use App\Resource;
 
 class Signature extends Model {
 
-    protected $fillable = ['name', 'credits', 'semester', 'required'];
+    protected $fillable = ['name', 'description', 'credits', 'semester', 'required'];
 
 	public function resources()
     {

@@ -22,7 +22,7 @@
 					</div>
 					<div class="icons col-md-5">
 						<span class="mdi tooltipped" data-position="bottom" data-delay="50" data-tooltip="Veces calificado">
-							<i class="mdi-action-done-all"></i>{{ count($teacher->ratings) }}
+							<i class="mdi-social-person"></i>{{ count($teacher->ratings) }}
 						</span>
 						<span class="mdi tooltipped" data-position="bottom" data-delay="50" data-tooltip="Calificación">
 							<i class="mdi-action-grade"></i> {{ $teacher->rating }}

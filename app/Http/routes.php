@@ -28,6 +28,9 @@ Route::resource('teacher', 'TeacherController');
 Route::get('/prueba', 'Index@prueba');
 
 
+Route::get('/rate');
+
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

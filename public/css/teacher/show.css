@@ -1,0 +1,14 @@
+.teacher-view{
+	background-color: #fff;
+	padding-top: 50px;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+
+.mdi-action-grade{
+	color: #FFDE78;
+}
+
+.mdi-action-grade.off{
+	color: #CFCFCF;
+}

@@ -84,4 +84,8 @@ class TeacherController extends Controller {
 		//
 	}
 
+	public function rate($rate){
+		
+	}
+
 }
