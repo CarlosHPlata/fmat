@@ -12,3 +12,8 @@
 .mdi-action-grade.off{
 	color: #CFCFCF;
 }
+
+.resources{
+	max-height: 200px;
+	overflow: auto;
+}

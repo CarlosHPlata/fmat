@@ -12,6 +12,7 @@ class CommentsTableSeeder extends Seeder {
 			\DB::table('comments')->insert(array(
 				'comment'			=> $faker->paragraph,
 				'anonymous'			=> $faker->boolean,
+				'date'				=> $faker->date,
 				
 				'commentable_id'	=> $faker->numberBetween(1, 9),
 				'commentable_type'	=> $faker->randomElement(['App\Signature','App\Teacher', 'App\Bulletin']),

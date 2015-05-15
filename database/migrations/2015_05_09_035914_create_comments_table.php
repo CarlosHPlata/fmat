@@ -17,6 +17,7 @@ class CreateCommentsTable extends Migration {
 			$table->increments('id');
 			$table->string('comment');
 			$table->boolean('anonymous');
+			$table->date('date');
 
 			$table->integer('commentable_id')->unsigned();
 			$table->string('commentable_type');
