@@ -64,10 +64,10 @@
 					<p>
 						<ul class="collection">
 							@foreach ($teachers as $teacher)
-								<a class="collection-item" href=""> 
+								<a class="collection-item" href="{{ route('teacher.show', $teacher) }}"> 
 									<div> 
 										{{ $teacher->full_name }}
-										<span href="#!" class="secondary-content">
+										<span class="secondary-content">
 											{{$teacher->rating}}<i class="mdi-action-grade"></i>
 										</span>
 									</div> 

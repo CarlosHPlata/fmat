@@ -61,7 +61,8 @@ class TeacherController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$teacher = Teacher::findOrFail($id);
+		return view('teacher.edit', compact('teacher'));
 	}
 
 	/**

@@ -5,11 +5,6 @@
  @endsection
 
  @section('content')
-	@if( !Auth::guest() )
-		{{ Auth::user()->full_name }} <br>
-		{{ Auth::user()->type }} <br>
-		{{ Auth::user()->isLevel('user') }}
-	@endif
 	<div class="collection">
 		@foreach($teachers as $teacher)
 

@@ -33,10 +33,26 @@
 	        <div class="row lead">
 	        	<center>
 	        		<div id="stars-existing" class="starrr" data-rating='{{ceil($teacher->rating)}}'></div>
-	        		<i class="mdi-social-person"></i> {{count($teacher->ratings)}}
+	        		@if (!Auth::guest())
+	        			<i class="mdi-social-person {{ count($teacher->ratings()->where('user_id', '=', Auth::user()->id)->get())>0? 'green-text text-lighten-3':'' }}"></i>
+	        		@else
+						<i class="mdi-social-person"></i>
+	        		@endif 
+	        		{{count($teacher->ratings)}}
 	        		<a style="display:none;" id="rating-a" data-id="{{ $teacher->id }}" href="{{ route('rating', ['variable', 'teacher']) }}"></a>
 	        	</center>
 	        </div>
+
+
+	        @if (!Auth::guest())
+	        @if (Auth::user()->isLevel('admin'))
+				<div class="row">
+					<div class="col-md-12">
+						<a href="{{ route('teacher.edit', $teacher) }}" class="btn-floating btn-small waves-effect waves-light teal accent-4" style="margin: 0px 48%;"><i class="mdi-content-create"></i></a>
+					</div>
+				</div>
+	        @endif
+	        @endif
 
 	        <div class="row">
 	        	<table class="table">
@@ -107,65 +123,43 @@
 
 	        <div class="row resources">
 	        	<h4>Todos los recursos historicos</h4>
-	        	  		<table class="table">
-	        	  			<thead>
-	        	  				<th>Recursos</th>
-	        	  			</thead>
-	        	  			<tbody>
-	        	  				@foreach ($teacher->resources as $resource)
-	        						<tr>
-	        							<td>
-	        								<div>
-	        									<i class="{{ $resource->type == 'work'?'mdi-action-receipt':'mdi-action-description' }} tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ $resource->type == 'work'?'tarea':'examen' }}"></i> 
-	        									{{$resource->name}}
-	        									<span class="pull-right"> <i class="mdi-action-class"></i> {{ $resource->signature->name }} </span>
-	        								</div>
-	        								<div>
-	        									{{ $resource->description }}
-	        								</div>
-	        								@if ($resource->path)
-	        									<div >
-	        										<a href="" class="pull-right"><i class="small mdi-file-file-download"></i></a>
-	        									</div>
-	        								@endif														
-	        							</td>
-	        						</tr>
-	        	  				@endforeach
-	        	  			</tbody>
-	        	  		</table>
+    	  		<table class="table">
+    	  			<thead>
+    	  				<th>Recursos</th>
+    	  			</thead>
+    	  			<tbody>
+    	  				@foreach ($teacher->resources as $resource)
+    						<tr>
+    							<td>
+    								<div>
+    									<i class="{{ $resource->type == 'work'?'mdi-action-receipt':'mdi-action-description' }} tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ $resource->type == 'work'?'tarea':'examen' }}"></i> 
+    									{{$resource->name}}
+    									<span class="pull-right"> <i class="mdi-action-class"></i> {{ $resource->signature->name }} </span>
+    								</div>
+    								<div>
+    									{{ $resource->description }}
+    								</div>
+    								@if ($resource->path)
+    									<div >
+    										<a href="" class="pull-right"><i class="small mdi-file-file-download"></i></a>
+    									</div>
+    								@endif														
+    							</td>
+    						</tr>
+    	  				@endforeach
+    	  			</tbody>
+    	  		</table>
 	        </div>
 		</div>
 	</div>
 
 	<div class="row comments" id="comments">
 		<span class="brown-text text-lighten-1">Comentarios</span>
+
+		@include('comments.partials.commentform')
+
 		@foreach ($teacher->comments()->orderBy('created_at', 'DESC')->get() as $comment)
-			<div class="card white">
-			  	<div class="card-content row">
-			    	<div class="col-md-6">
-			    		{{ $comment->anonymous? '@'.$comment->user->user_name : 'anonimo'}}
-			    	</div>
-			    	<div class="col-md-6">
-			    		<span class="pull-right"><i class="mdi-device-access-time"></i>
-			    			<abbr class="timeago" title="{{ date("c", strtotime($comment->created_at)) }}">{{$comment->created_at}}</abbr>
-			    		</span>
-			    	</div>
-			    	<div class="col-md-12">
-			    		<p>I am a very simple card. I am good at containing small bits of information.
-			    		I am convenient because I require little markup to use effectively.</p>
-			    	</div>
-			  	</div>
-			  	@if (!Auth::guest())
-			  	@if (Auth::user()->id == $comment->user->id || Auth::user()->isLevel('admin'))
-					<div class="card-action">
-						<div class="actions">
-							<a href="#" class="pull-right"><i class="mdi-content-create"></i></a>
-							<a href='#' class="pull-right"><i class="mdi-action-delete"></i></a>
-						</div>
-					</div>
-			  	@endif
-			  	@endif
-			</div>
+			@include('comments.partials.commentaries')
 		@endforeach
 	</div>
 
