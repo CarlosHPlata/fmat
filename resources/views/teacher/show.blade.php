@@ -139,13 +139,17 @@
 
 	<div class="row comments" id="comments">
 		<span class="brown-text text-lighten-1">Comentarios</span>
-		@foreach ($teacher->comments as $comment)
+		@foreach ($teacher->comments()->orderBy('created_at', 'DESC')->get() as $comment)
 			<div class="card white">
 			  	<div class="card-content row">
 			    	<div class="col-md-6">
-			    		{{ $comment->anonymous? $comment->user->user_name : 'anonimo'}}
+			    		{{ $comment->anonymous? '@'.$comment->user->user_name : 'anonimo'}}
 			    	</div>
-			    	<div class="col-md-6"><span class="pull-right"><i class="mdi-device-access-time"></i></span></div>
+			    	<div class="col-md-6">
+			    		<span class="pull-right"><i class="mdi-device-access-time"></i>
+			    			<abbr class="timeago" title="{{ date("c", strtotime($comment->created_at)) }}">{{$comment->created_at}}</abbr>
+			    		</span>
+			    	</div>
 			    	<div class="col-md-12">
 			    		<p>I am a very simple card. I am good at containing small bits of information.
 			    		I am convenient because I require little markup to use effectively.</p>
@@ -171,4 +175,10 @@
 
 @section('scripts')
 	<script type="text/javascript" src="{{ asset('js/teacher/show.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/comments/jquery.timeago.js') }}"></script>
+	<script type="text/javascript">
+		$(function(){
+			jQuery("abbr.timeago").timeago();
+		});
+	</script>
 @endsection
