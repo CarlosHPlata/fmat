@@ -9,7 +9,7 @@ class CommentsTableSeeder extends Seeder {
 		$faker = Faker::create();
 		$date = $faker->dateTime();
 
-		for ($i=0; $i < 50; $i++) { 
+		for ($i=0; $i < 200; $i++) { 
 			\DB::table('comments')->insert(array(
 				'comment'			=> $faker->paragraph,
 				'anonymous'			=> $faker->boolean,
