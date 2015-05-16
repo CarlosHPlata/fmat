@@ -28,7 +28,7 @@ class TeacherController extends Controller {
 	 */
 	public function create()
 	{
-		return view();
+		return view('teacher.create');
 	}
 
 	/**
@@ -71,9 +71,15 @@ class TeacherController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Request $request)
 	{
-		//
+		$teacher = Teacher::findOrFail($id);
+		$vars = $request->all();
+		$teacher->fill($vars);
+		$teacher->save();
+
+		\Session::flash('message', 'Se han guardado los cambios para: '.$teacher->full_name);
+		return redirect()->route('teacher.show', $teacher);
 	}
 
 	/**

@@ -4,7 +4,7 @@
 	
 	<div class="row card" style="padding-top:40px;">
 		<div class="col-md-12">
-			{!! Form::open( array('route' => ['teacher.update', $teacher])) !!}
+			{!! Form::open( array('route' => 'teacher.store', 'method' => 'POST')) !!}
 				@include ('teacher.partials.teacherfields')
 				<div class="row">
 					<div class="col-md-5 pull-right">

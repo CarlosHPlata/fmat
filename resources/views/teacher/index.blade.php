@@ -5,6 +5,15 @@
  @endsection
 
  @section('content')
+ 	@if (!Auth::guest())
+ 	@if (Auth::user()->isLevel('admin'))
+ 		<div class="row" style="margin-top:20px;">
+ 			<div class="col-md-12">
+ 				<a href="{{ route('teacher.create') }}" class="waves-effect waves-light btn pull-right" style="margin-right: 20px;">Crear</a>
+ 			</div>
+ 		</div>
+ 	@endif
+ 	@endif
 	<div class="collection">
 		@foreach($teachers as $teacher)
 
