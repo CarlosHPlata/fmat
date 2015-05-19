@@ -5,9 +5,9 @@
 		    <a href="#" data-activates="mobile-demo" class="button-collapse teal-text text-lighten-1"><i class="mdi-navigation-menu"></i></a>
 
         <ul class="right hide-on-med-and-down">
-          <li><a href="#" class="teal-text text-lighten-1">Materias</a></li>
+          <li><a href="{{ route('signature.index') }}" class="teal-text text-lighten-1">Materias</a></li>
          	<li><a href="{{ route('teacher.index') }}" class="teal-text text-lighten-1">Maestros</a></li>
-          <li><a href="#" class="teal-text text-lighten-1">Noticias</a></li>
+          <li><a href="{{ route('bulletin.index') }}" class="teal-text text-lighten-1">Noticias</a></li>
           <li class="find">
             <form>
                 <div class="input-field">
@@ -19,9 +19,9 @@
           </li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-            <li><a href="sass.html" class="teal-text text-accent-4" >Materias</a></li>
+            <li><a href="{{ route('signature.index') }}" class="teal-text text-accent-4" >Materias</a></li>
           	<li><a href="{{ route('teacher.index') }}" class="teal-text text-accent-4" >Maestros</a></li>
-            <li><a href="#" class="teal-text text-accent-4" >Noticias</a></li>
+            <li><a href="{{ route('bulletin.index') }}" class="teal-text text-accent-4" >Noticias</a></li>
           	<li>
           		<form>
           		    <div class="input-field">

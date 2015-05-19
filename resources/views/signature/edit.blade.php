@@ -5,17 +5,17 @@
 @endsection
 
 @section('content')
-	
+
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
-			{!! Form::model($teacher, array('route' => ['teacher.update', $teacher], 'method' => 'put')) !!}
+			{!! Form::model($signature, array('route' => ['signature.update', $signature], 'method' => 'put')) !!}
 				
 				<h4>Informació basica</h4>
-				@include ('teacher.partials.teacherfields')
+				@include ('signature.partials.signaturefields')
 
 				<hr>
-				<h4>Materias</h4>
-				@include ('teacher.partials.signaturesfields')
+				<h4>Maestros</h4>
+				@include ('signature.partials.teachersfields')
 
 				<div class="row">
 					<div class="col-md-5 pull-right">
@@ -32,7 +32,7 @@
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
 			<h4>Otras opciones</h4>
-			{!! Form::open(['route' => ['teacher.destroy', $teacher], 'method' => 'DELETE']) !!}
+			{!! Form::open(['route' => ['signature.destroy', $signature], 'method' => 'DELETE']) !!}
 				<button class="btn waves-effect waves-light" type="submit" name="action" style="margin:20px;">Eliminar
 				    <i class="mdi-action-delete right"></i>
 				 </button>
@@ -41,6 +41,7 @@
 	</div>
 
 @endsection
+
 
 @section ('scripts')
 	<script type="text/javascript">

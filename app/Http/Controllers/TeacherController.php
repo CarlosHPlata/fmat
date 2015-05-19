@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Signature;
 use App\Teacher;
 use App\Rating;
 
@@ -28,7 +29,8 @@ class TeacherController extends Controller {
 	 */
 	public function create()
 	{
-		return view('teacher.create');
+		$signatures = Signature::get();
+		return view('teacher.create', compact('signatures'));
 	}
 
 	/**
@@ -36,9 +38,21 @@ class TeacherController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$teacher = new Teacher();
+		$vars = $request->all();
+		$teacher->fill($vars);
+
+		$teacher->save();
+
+		$signatures = $request->signatures;
+
+		if ($signatures != null) 
+			$teacher->signatures()->sync($signatures);
+
+		\Session::flash('message', 'Se ha guardado un nuevo maestro: '.$teacher->full_name);
+		return redirect()->route('teacher.show', $teacher);
 	}
 
 	/**
@@ -62,7 +76,8 @@ class TeacherController extends Controller {
 	public function edit($id)
 	{
 		$teacher = Teacher::findOrFail($id);
-		return view('teacher.edit', compact('teacher'));
+		$signatures = Signature::get();
+		return view('teacher.edit', compact('teacher', 'signatures'));
 	}
 
 	/**
@@ -75,7 +90,14 @@ class TeacherController extends Controller {
 	{
 		$teacher = Teacher::findOrFail($id);
 		$vars = $request->all();
+
 		$teacher->fill($vars);
+
+		$signatures = $request->input('signatures');
+
+		if ($signatures != null) 
+			$teacher->signatures()->sync($signatures);
+
 		$teacher->save();
 
 		\Session::flash('message', 'Se han guardado los cambios para: '.$teacher->full_name);
@@ -90,7 +112,12 @@ class TeacherController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$teacher = Teacher::findOrFail($id);
+		$full_name = $teacher->full_name;
+		$teacher->delete();
+
+		\Session::flash('message', 'Se ha eliminado el maestro: '.$full_name);
+		return redirect()->route('teacher.index');
 	}
 
 	public function rate($rate, $teacher, Guard $auth){

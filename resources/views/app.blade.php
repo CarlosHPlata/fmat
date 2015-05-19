@@ -9,6 +9,7 @@
 	
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
+	<link rel="stylesheet" href="{{ asset('css/select/selectivity-full.css') }}">
 
 	@yield('css')
 
@@ -50,6 +51,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/select/selectivity-full.js') }}"></script>
 
 	<!-- El siguiente codigo inicia el menu movil -->
     <script type="text/javascript">

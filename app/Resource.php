@@ -15,6 +15,10 @@ class Resource extends Model {
 		return $this->belongsTo('APP\Signature');
 	}
 
+	public function user(){
+		
+	}
+
 	public function setTeacherAttribute($teacher){
 		$this->teacher_id = $teacher->id;
 	}

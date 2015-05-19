@@ -22,6 +22,7 @@ class CreateSignaturesTable extends Migration {
 			$table->boolean('required');
 
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

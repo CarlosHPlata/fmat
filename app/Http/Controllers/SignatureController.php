@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Signature;
+use App\Teacher;
 
 class SignatureController extends Controller {
 
@@ -14,7 +16,8 @@ class SignatureController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$signatures = Signature::get();
+		return view('signature.index', compact('signatures'));
 	}
 
 	/**
@@ -24,7 +27,8 @@ class SignatureController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$teachers = Teacher::get();
+		return view('signature.create', compact('teachers'));
 	}
 
 	/**
@@ -32,9 +36,21 @@ class SignatureController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$signature = new Signature();
+		$vars = $request->all();
+		$signature->fill($vars);
+
+		$signature->save();
+
+		$teachers = $request->input('teachers');
+
+		if ($teachers != null)
+			$signature->teachers()->sync($teachers);
+
+		\Session::flash('message', 'Se ha guardado una nueva materia ' . $signature->name);
+		return redirect()->route('signature.show', $signature);
 	}
 
 	/**
@@ -45,7 +61,8 @@ class SignatureController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$signature = Signature::findOrFail($id);
+		return view('signature.show', compact('signature'));
 	}
 
 	/**
@@ -56,7 +73,9 @@ class SignatureController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$teachers = Teacher::get();
+		$signature = Signature::findOrFail($id);
+		return view('signature.edit', compact('signature', 'teachers'));
 	}
 
 	/**
@@ -65,9 +84,22 @@ class SignatureController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id,Request $request)
 	{
-		//
+		$signature = Signature::findOrFail($id);
+		$vars = $request->all();
+
+		$signature->fill($vars);
+
+		$teachers = $request->input('signatures');
+
+		if ($teachers != null)
+			$signature->teachers()->sync($teachers);
+
+		$signature->save();
+
+		\Session::flash('message', 'Se ha guardado los cambios para ' . $signature->name);
+		return redirect()->route('signature.show', $signature);
 	}
 
 	/**
@@ -78,7 +110,13 @@ class SignatureController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$signature = Signature::findOrFail($id);
+		$name =  $signature->name;
+
+		$signature->delete();
+
+		\Session::flash('message', 'Se ha eliminado el maestro: ' . $name);
+		return redirect()->route('signature.index');
 	}
 
 }

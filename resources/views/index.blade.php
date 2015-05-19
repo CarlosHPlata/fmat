@@ -85,7 +85,7 @@
 					<p>
 						<ul class="collection">
 							@foreach ($signatures as $signature)
-								<a class="collection-item" href=""> 
+								<a class="collection-item" href="{{ route('signature.show', $signature) }}"> 
 									<div> 
 										{{ $signature->name }}
 										<span href="#!" class="secondary-content">

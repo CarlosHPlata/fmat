@@ -13,19 +13,11 @@
 
 Route::get('/', 'Index@index');
 
-
-
-Route::get('/template', function(){
-	return view('example.indexview');
-});
-
-
-
 Route::resource('teacher', 'TeacherController');
 
+Route::resource('signature', 'SignatureController');
 
-
-Route::get('/prueba', 'Index@prueba');
+Route::resource('bulletin', 'BulletinController');
 
 
 Route::get('/rate/{rating}/{teacher}', [

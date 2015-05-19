@@ -2,9 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 use App\Teacher;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Resource;
 
 class Signature extends Model {
+
+    use SoftDeletes;
 
     protected $fillable = ['name', 'description', 'credits', 'semester', 'required'];
 

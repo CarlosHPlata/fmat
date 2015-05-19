@@ -22,6 +22,7 @@ class CreateTeachersTable extends Migration {
 			$table->string('cubicle');
 			$table->string('title')->nullable();
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

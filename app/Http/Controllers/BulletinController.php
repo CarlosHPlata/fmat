@@ -2,8 +2,12 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+
+use Illuminate\Contracts\Auth\Guard;
+
+use App\Bulletin;
+use Carbon\Carbon;
 
 class BulletinController extends Controller {
 
@@ -14,7 +18,8 @@ class BulletinController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$bulletins = Bulletin::get();
+		return view('bulletin.index', compact('bulletins'));
 	}
 
 	/**
@@ -24,7 +29,7 @@ class BulletinController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('bulletin.create');
 	}
 
 	/**
@@ -32,9 +37,22 @@ class BulletinController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request, Guard $auth)
 	{
-		//
+		if(!$auth->guest()){
+			$bulletin = new Bulletin();
+			$vars = $request->all();
+
+			$bulletin->title = $vars['title'];
+			$bulletin->content = $vars['content'];
+			$bulletin->date = $vars['date'];
+			$bulletin->user_id = $auth->user()->id;
+
+			$bulletin->save();
+
+			\Session::flash('message', 'Se ha guardado una nueva nota:' . $bulletin->title);
+			return redirect()->route('bulletin.show', $bulletin);
+		}
 	}
 
 	/**
@@ -45,7 +63,8 @@ class BulletinController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$bulletin = Bulletin::findOrFail($id);
+		return view('bulletin.show', compact('bulletin'));
 	}
 
 	/**
@@ -56,7 +75,8 @@ class BulletinController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$bulletin = Bulletin::findOrFail($id);
+		return view('bulletin.edit', compact('bulletin'));
 	}
 
 	/**
@@ -65,9 +85,19 @@ class BulletinController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Request $request)
 	{
-		//
+		$bulletin = Bulletin::findOrFail($id);
+		$vars = $request->all();
+
+		$bulletin->title = $vars['title'];
+		$bulletin->content = $vars['content'];
+		$bulletin->date = $vars['date'];
+
+		$bulletin->save();
+
+		\Session::flash('message', 'Se han guardado los cambios para la noticia: ' . $bulletin->title);
+		return redirect()->route('bulletin.show', $bulletin);
 	}
 
 	/**
@@ -78,7 +108,11 @@ class BulletinController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$bulletin = Bulletin::findOrFail($id);
+		$bulletin->delete();
+
+		\Session::flash('message', 'Se ha eliminado la noticia: ' . $bulletin->title);
+		return redirect()->route('bulletin.index');
 	}
 
 }
