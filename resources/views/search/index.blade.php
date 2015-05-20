@@ -101,5 +101,25 @@
 			</div>
 		@endforelse
 	</div>
+	<hr>
+	<h3>Recursos</h3>
+	<div class="collection">
+		@forelse($resources as $resource)
+			<a href="#" class="collection-item">
+				<div class="row" style="margin-bottom: 0;">
+					<div class="col-md-12">
+						<h5>
+							{{ $resource->name }}
+						</h5>
+						<p>{{ $resource->description }}</p>
+					</div>
+				</div>
+			</a>
+			@empty
+			<div class="card-panel">
+				<p class="flow-text">No results</p>
+			</div>
+		@endforelse
+	</div>
 
 @endsection
