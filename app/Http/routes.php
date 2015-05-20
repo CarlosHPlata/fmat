@@ -37,3 +37,8 @@
 		'password' => 'Auth\PasswordController',
 	]);
 
+	Route::post('search', [
+		'as' => 'search',
+		'uses' => 'SearchesController@search'
+	]);
+

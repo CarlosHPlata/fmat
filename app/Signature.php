@@ -4,12 +4,22 @@ use Illuminate\Database\Eloquent\Model;
 use App\Teacher;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Resource;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Signature extends Model {
-
+    
     use SoftDeletes;
+    use SearchableTrait;
 
     protected $fillable = ['name', 'description', 'credits', 'semester', 'required'];
+
+    protected $searchable = [
+        'columns' => [
+            'name'        => 10,
+            'description' => 10,
+            'semester'    => 2,
+        ]
+    ];
 
 	public function resources()
     {

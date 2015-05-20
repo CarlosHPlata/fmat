@@ -9,13 +9,13 @@
          	<li><a href="{{ route('teacher.index') }}" class="teal-text text-lighten-1">Maestros</a></li>
           <li><a href="{{ route('bulletin.index') }}" class="teal-text text-lighten-1">Noticias</a></li>
           <li class="find">
-            <form>
-                <div class="input-field">
-                    <input id="search" type="search" class="" required>
-                    <label for="search"><i class="mdi-action-search teal-text text-lighten-1"></i></label>
-                    <i class="mdi-navigation-close"></i>
-                </div>
-            </form>
+            {!!Form::open(['method' => 'post', 'action' => 'SearchesController@search'])!!}
+              <div class="input-field">
+                <input id="search" type="search" class="" name="query" required>
+                <label for="search"><i class="mdi-action-search teal-text text-lighten-1"></i></label>
+                <i class="mdi-navigation-close"></i>
+              </div>
+            {!!Form::close()!!}
           </li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
@@ -23,13 +23,13 @@
           	<li><a href="{{ route('teacher.index') }}" class="teal-text text-accent-4" >Maestros</a></li>
             <li><a href="{{ route('bulletin.index') }}" class="teal-text text-accent-4" >Noticias</a></li>
           	<li>
-          		<form>
+          		{!!Form::open(['method' => 'post', 'action' => 'SearchesController@search'])!!}
           		    <div class="input-field">
-          		        <input id="search" type="search" required>
+          		        <input id="search" type="search" name="query" required>
           		        <label for="search"><i class="mdi-action-search teal-text text-accent-4"></i></label>
           		        <i class="mdi-navigation-close"></i>
           		    </div>
-          		</form>
+          		{!!Form::close()!!}
           	</li>
         </ul>
       </div>

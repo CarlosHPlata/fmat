@@ -4,12 +4,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Resource;
 use App\Signature;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Teacher extends Model {
 
     use SoftDeletes;
+    use SearchableTrait;
 
     protected $fillable = ['first_name', 'last_name', 'email', 'extension', 'cubicle', 'title'];
+
+    protected $searchable = [
+        'columns' => [
+            'first_name' => 10,
+            'last_name'  => 10,
+            'email'      => 2,
+        ]
+    ];
 
     public function comments(){
         return $this->morphMany('App\Comment', 'commentable');

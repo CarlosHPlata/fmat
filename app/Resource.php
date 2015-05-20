@@ -1,10 +1,20 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Resource extends Model {
 
+	use SearchableTrait;
+
 	protected $fillable = ['name', 'description', 'path', 'type'];
+
+	protected $searchable = [
+		'columns' => [
+			'name'        => 10,
+			'description' => 10,
+		]
+	];
 
 
 	public function teacher(){

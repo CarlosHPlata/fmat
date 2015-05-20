@@ -1,10 +1,20 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Bulletin extends Model {
 
-	protected $fiilable = ['title', 'description', 'date'];
+    use SearchableTrait;
+
+	protected $fiilable = ['title', 'content', 'date'];
+
+    protected $searchable = [
+        'columns' => [
+            'title'       => 10,
+            'content' => 10,
+        ]
+    ];
 
 	public function comments(){
         return $this->morphMany('App\Comment', 'commentable');

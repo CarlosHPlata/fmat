@@ -73,7 +73,7 @@ class ResourceController extends Controller {
 			$resource->save();
 		}
 
-		/Session::flash('message', 'Se ha subido su recurso con exito');
+		Session::flash('message', 'Se ha subido su recurso con exito');
 		return redirect()->route('resource.show', $resource);
 		
 	}
