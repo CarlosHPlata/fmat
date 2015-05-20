@@ -11,24 +11,29 @@
 |
 */
 
-Route::get('/', 'Index@index');
+	Route::get('/', [
+		'as' 	=> 'index', 
+		'uses' 	=> 'Index@index'
+	]);
 
-Route::resource('teacher', 'TeacherController');
+	Route::resource('teacher', 'TeacherController');
 
-Route::resource('signature', 'SignatureController');
+	Route::resource('signature', 'SignatureController');
 
-Route::resource('bulletin', 'BulletinController');
+	Route::resource('bulletin', 'BulletinController');
 
-
-Route::get('/rate/{rating}/{teacher}', [
-	'as' 	=> 'rating',
-	'uses' 	=> 'TeacherController@rate'
-]);
-
+	Route::resource('resource', 'ResourceController');
 
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+	Route::get('/rate/{rating}/{teacher}', [
+		'as' 	=> 'rating',
+		'uses' 	=> 'TeacherController@rate'
+	]);
+
+
+
+	Route::controllers([
+		'auth' => 'Auth\AuthController',
+		'password' => 'Auth\PasswordController',
+	]);
 

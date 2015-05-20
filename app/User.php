@@ -37,6 +37,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('App\Rating');
 	}
 
+	public function resources(){
+		return $this->hasMany('App\Resource');
+	}
+
 	public function isLevel($level){
 		switch ($level) {
 			case 'user':

@@ -17,6 +17,7 @@ class ResourcesTableSeeder extends Seeder {
 
 				'teacher_id'	=> $faker->numberBetween(1, 9),
 				'signature_id' 	=> $faker->numberBetween(1, 9),
+				'user_id'		=> $faker->numberBetween(1,9),
 			));
 		}
 	}

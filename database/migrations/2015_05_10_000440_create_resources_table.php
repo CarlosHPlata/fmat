@@ -22,6 +22,7 @@ class CreateResourcesTable extends Migration {
 
 			$table->integer('teacher_id')->unsigned();
 			$table->integer('signature_id')->unsigned();
+			$table->integer('user_id')->unsigned();
 			
 			$table->timestamps();
 
@@ -33,6 +34,11 @@ class CreateResourcesTable extends Migration {
 			$table->foreign('teacher_id')
 				->references('id')
 				->on('teachers')
+				->onDelete('cascade');
+
+			$table->foreign('user_id')
+				->references('id')
+				->on('users')
 				->onDelete('cascade');
 		});
 	}

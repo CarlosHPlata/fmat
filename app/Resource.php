@@ -16,7 +16,7 @@ class Resource extends Model {
 	}
 
 	public function user(){
-		
+		return $this->belongsTo('App\User');
 	}
 
 	public function setTeacherAttribute($teacher){
