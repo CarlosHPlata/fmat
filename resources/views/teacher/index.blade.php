@@ -45,4 +45,6 @@
 			</a>
 		@endforeach
 	</div>
+  {!! (new App\MaterialPagination($teachers))->render() !!}
+
  @endsection

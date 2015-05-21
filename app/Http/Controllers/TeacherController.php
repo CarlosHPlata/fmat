@@ -23,7 +23,7 @@ class TeacherController extends Controller {
 	 */
 	public function index()
 	{
-		$teachers = Teacher::orderBy('first_name')->get();
+		$teachers = Teacher::orderBy('first_name')->paginate(5);
 		return view('teacher.index' ,compact('teachers'));
 	}
 
@@ -53,7 +53,7 @@ class TeacherController extends Controller {
 
 		$signatures = $request->signatures;
 
-		if ($signatures != null) 
+		if ($signatures != null)
 			$teacher->signatures()->sync($signatures);
 
 		\Session::flash('message', 'Se ha guardado un nuevo maestro: '.$teacher->full_name);
@@ -100,7 +100,7 @@ class TeacherController extends Controller {
 
 		$signatures = $request->input('signatures');
 
-		if ($signatures != null) 
+		if ($signatures != null)
 			$teacher->signatures()->sync($signatures);
 
 		$teacher->save();

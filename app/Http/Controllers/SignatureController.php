@@ -21,7 +21,7 @@ class SignatureController extends Controller {
 	 */
 	public function index()
 	{
-		$signatures = Signature::get();
+		$signatures = Signature::paginate(5);
 		return view('signature.index', compact('signatures'));
 	}
 

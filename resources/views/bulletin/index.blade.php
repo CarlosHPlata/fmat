@@ -1,7 +1,7 @@
 @extends ('app')
 
 @section ('content')
-	
+
 	@if (!Auth::guest())
 	@if (Auth::user()->isLevel('admin'))
 		<div class="card white">
@@ -12,7 +12,7 @@
 			</div>
 		</div>
 	@endif
-	@endif	
+	@endif
 
 	@foreach ($bulletins as $bulletin)
 		<div class="card white">
@@ -33,7 +33,9 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	@endforeach
+
+	{!! (new App\MaterialPagination($bulletins))->render() !!}
 
 @endsection

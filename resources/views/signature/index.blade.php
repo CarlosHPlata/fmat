@@ -47,5 +47,6 @@
 			</a>
 		@endforeach
 	</div>
+  {!! (new App\MaterialPagination($signatures))->render() !!}
 
  @endsection

@@ -23,7 +23,7 @@ class BulletinController extends Controller {
 	 */
 	public function index()
 	{
-		$bulletins = Bulletin::get();
+		$bulletins = Bulletin::paginate(5);
 		return view('bulletin.index', compact('bulletins'));
 	}
 

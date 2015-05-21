@@ -4356,7 +4356,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
   color: #777777;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
   border-color: #dddddd;
   cursor: not-allowed;
 }
