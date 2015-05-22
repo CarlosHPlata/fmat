@@ -132,7 +132,7 @@ class ResourceController extends Controller {
 			
 			$file->move($this->DESTINATION_PATH, $file_name);
 
-			$resource->path = $this->DESTINATION_PATH.$file_name;
+			$resource->path = $file_name;
 
 			$resource->save();
 		}
@@ -150,10 +150,24 @@ class ResourceController extends Controller {
 
 	}
 
-	public function removeFile($id){
-		$resource = Resource::findOrFail($id);
+	public function removeFile($id, Request $request){
+		if ($request->ajax()){
 
-		return $resource->name;
+			$resource = Resource::findOrFail($id);
+
+			if ( \File::exists($this->DESTINATION_PATH . $resource->path) ) {
+				\File::delete($this->DESTINATION_PATH . $resource->path);
+				$resource->path = null;
+				$resource->save();
+				return "done";
+			} else {
+				abort(500);
+			}
+
+		}
 	}
+
+
+
 
 }

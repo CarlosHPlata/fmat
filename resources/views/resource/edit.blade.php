@@ -16,14 +16,16 @@
 				</div>
 
 				@if (isset($resource->path) && $resource->path != null && $resource->path != '')
-					<div class="row card white" id="input">
-						<div class="col-md-9">
-							<a href="{{ asset('uploads/resources/'.$resource->path) }}" target="_blank">
-								<i class="mdi-file-attachment"></i> {{ $resource->name }}
-							</a>
-						</div>
-						<div class="col-md-3">
-							<a href="#!" class="pull-right" id="removefile" data-id="{{ $resource->id }}"><i class="mdi-action-delete"></i></a>
+					<div id="input">
+						<div class="row card white">
+							<div class="col-md-9">
+								<a href="{{ asset('uploads/resources/'.$resource->path) }}" target="_blank">
+									<i class="mdi-file-attachment"></i> {{ $resource->name }}
+								</a>
+							</div>
+							<div class="col-md-3">
+								<a href="#!" class="pull-right" id="removefile" data-id="{{ $resource->id }}"><i class="mdi-action-delete"></i></a>
+							</div>
 						</div>
 					</div>
 				@else 
@@ -74,16 +76,9 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $('select').material_select();
-
-		    $('#removefile').click(function(){
-		    	var url = $('#url').attr('href');
-		    	var data = $('#form-file').serialize();
-		    	$.post(url, data, function(data){
-		    		alert("Data: " + data + "");
-		    	});
-		    	alert(result);
-		    });
 		});
 	</script>
+
+	<script type="text/javascript" src="{{ asset('js/resource/edit.js') }}"></script>
 
 @endsection
