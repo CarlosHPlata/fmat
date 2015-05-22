@@ -30,6 +30,10 @@
 		'uses' 	=> 'TeacherController@rate'
 	]);
 
+	Route::post('/resource/remove/{resource}', [
+		'as'	=> 'resource.remove.file',
+		'uses'	=> 'ResourceController@removeFile'
+	]);
 
 
 	Route::controllers([

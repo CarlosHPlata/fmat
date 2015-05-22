@@ -68,12 +68,12 @@ class ResourceController extends Controller {
 			
 			$file->move($this->DESTINATION_PATH, $file_name);
 
-			$resource->path = $this->DESTINATION_PATH.$file_name;
+			$resource->path = $file_name;
 
 			$resource->save();
 		}
 
-		Session::flash('message', 'Se ha subido su recurso con exito');
+		\Session::flash('message', 'Se ha subido su recurso con exito');
 		return redirect()->route('resource.show', $resource);
 		
 	}
@@ -101,6 +101,8 @@ class ResourceController extends Controller {
 		$signatures = Signature::get();
 		$teachers = Teacher::get();
 		$resource = Resource::findOrFail($id);
+
+		return view('resource.edit', compact('resource', 'signatures', 'teachers'));
 
 	}
 
@@ -146,6 +148,12 @@ class ResourceController extends Controller {
 	{
 		$resource = Resource::findOrFail($id);
 
+	}
+
+	public function removeFile($id){
+		$resource = Resource::findOrFail($id);
+
+		return $resource->name;
 	}
 
 }
