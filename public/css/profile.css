@@ -1,0 +1,14 @@
+.user-name, .links, .points{
+	margin-bottom: 0;
+}
+.exp{
+	font-size: 20pt;
+}
+.exp, .points{
+	text-align: right;
+	text-transform: uppercase;
+}
+
+.content{
+	min-height: 400px;
+}

@@ -24,10 +24,25 @@
 
 	Route::resource('resource', 'ResourceController');
 
+	Route::get('/profile', [
+		'as'	=> 'profile',
+		'uses'	=> 'ProfileController@index'
+	]);
+
 
 	Route::get('/rate/{rating}/{teacher}', [
 		'as' 	=> 'rating',
 		'uses' 	=> 'TeacherController@rate'
+	]);
+
+	Route::get('/favorite/teacher/{teacher}',[
+		'as'	=> 'favorite.teacher',
+		'uses'	=> 'TeacherController@favorite'
+	]);
+
+	Route::get('/favorite/signature/{signature}',[
+		'as'	=> 'favorite.signature',
+		'uses'	=> 'SignatureController@favorite'
 	]);
 
 	Route::post('/resource/remove/{resource}', [

@@ -10,6 +10,7 @@ use App\Resource;
 use App\User;
 use App\Signature;
 use App\Teacher;
+use App\Log;
 
 class ResourceController extends Controller {
 
@@ -19,16 +20,6 @@ class ResourceController extends Controller {
 	public function __construct(){
 		$this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy'] ]);
 		$this->DESTINATION_PATH = public_path().'\\uploads\\resources\\';
-	}
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
 	}
 
 	/**
@@ -73,21 +64,11 @@ class ResourceController extends Controller {
 			$resource->save();
 		}
 
+		$resource->delete($resource, $auth->user(), 'create');
+
 		\Session::flash('message', 'Se ha subido su recurso con exito');
 		return redirect()->route('resource.show', $resource);
 		
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$resource = Resource::findOrFail($id);
-
 	}
 
 	/**
@@ -136,6 +117,8 @@ class ResourceController extends Controller {
 
 			$resource->save();
 		}
+
+		$resource->delete($resource, $auth->user(), 'update');
 	}
 
 	/**
@@ -144,9 +127,17 @@ class ResourceController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id, Guard $auth)
 	{
 		$resource = Resource::findOrFail($id);
+
+		if ( \File::exist($this->DESTINATION_PATH . $resource->path) ){
+			\File::delete($this->DESTINATION_PATH . $resource->path);
+		}
+
+		$this->log();
+
+		$resource->delete($resource, $auth->user(), 'delete');
 
 	}
 
@@ -167,7 +158,24 @@ class ResourceController extends Controller {
 		}
 	}
 
+	public function log($resource, $user, $action){
+		$text = '';
 
+		switch ($action) {
+			case 'create':
+				$text.= 'creado recurso: ' . $resource->name .', 10 puntos exp';
+				break;
+			case 'update':
+				$text.= 'actualizado recurso: ' . $resource->name;
+				break;
+			case 'delete':
+				$text.= 'borrado recurso: ' . $resource->name .', -10 puntos exp';
+				break;
+		}
 
+		$log = new Log();
+		$log->setLog($user, $resource->id, 'App\Resource', $action, $text);
+		$log->save();
+	}
 
 }

@@ -2,14 +2,19 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Signature;
 use App\Teacher;
+use App\Log;
+use App\Signature;
 
 class SignatureController extends Controller {
 
-	public function __construct(){
+	protected $auth;
+
+	public function __construct(Guard $auth){
+		$this->auth = $auth;
 		$this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update', 'destroy'] ]);
 		$this->middleware('is_admin', ['only' => ['create', 'store', 'edit', 'update', 'destroy'] ]);
 	}
@@ -53,6 +58,8 @@ class SignatureController extends Controller {
 
 		if ($teachers != null)
 			$signature->teachers()->sync($teachers);
+
+		$this->log($signature, 'create');
 
 		\Session::flash('message', 'Se ha guardado una nueva materia ' . $signature->name);
 		return redirect()->route('signature.show', $signature);
@@ -103,6 +110,8 @@ class SignatureController extends Controller {
 
 		$signature->save();
 
+		$this->log($signature, 'update');
+
 		\Session::flash('message', 'Se ha guardado los cambios para ' . $signature->name);
 		return redirect()->route('signature.show', $signature);
 	}
@@ -120,8 +129,44 @@ class SignatureController extends Controller {
 
 		$signature->delete();
 
-		\Session::flash('message', 'Se ha eliminado el maestro: ' . $name);
+		$this->log($signature, 'delete');
+
+		\Session::flash('message', 'Se ha eliminado la asignatura: ' . $name);
 		return redirect()->route('signature.index');
+	}
+
+	public function favorite($signature, Guard $auth){
+		$fav = new Favorite();
+		$user = $auth->user();
+		$signature = Signature::findOrFail($signature);
+
+		$fav->user_id = $user->id;
+		$fav->favoritable_id = $signature->id;
+		$fav->favoritable_type = 'App\Signature';
+
+		$fav->save();
+		\Session::flash('message', 'Se ha agregado la materia: '.$signature->name.' a tus favoritos');
+		return redirect()->back();
+	}
+
+	public function log($signature, $action){
+		$text = '';
+
+		switch ($action) {
+			case 'create':
+				$text.= 'creada asignatura: ' . $signature->name;
+				break;
+			case 'update':
+				$text.= 'actualizada asignatura: ' . $signature->name;
+				break;
+			case 'delete':
+				$text.= 'borrada asignatura: ' . $signature->name;
+				break;
+		}
+
+		$log = new Log();
+		$log->setLog($this->auth->user(), $signature->id, 'App\Signature', $action, $text);
+		$log->save();
 	}
 
 }

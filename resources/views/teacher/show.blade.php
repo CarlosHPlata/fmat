@@ -72,6 +72,16 @@
 	        		</tbody>
 	        	</table>
 	        </div>
+
+            @if (!Auth::guest())
+            @if (Auth::user()->isLevel('user'))
+    			<div class="row">
+    				<div class="col-md-12">
+    					<a href="{{ route('teacher.edit', $teacher) }}" style="margin: 0px 48%;"><i class="small mdi-action-favorite-outline"></i></a>
+    				</div>
+    			</div>
+            @endif
+            @endif
 	        
 	        <hr>
 	        <div class="row">

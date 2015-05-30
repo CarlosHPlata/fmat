@@ -44,7 +44,7 @@
                 <li><a href="{{ url('auth/login') }}" class="btn-floating red"><i class="large mdi-action-input"></i></a></li>
               @else
                 <li><a href="{{ url('auth/logout') }}" class="btn-floating cyan"><i class="large mdi-action-lock-open"></i></a></li>
-                <li><a class="btn-floating red"><i class="large mdi-action-home"></i></a></li>
+                <li><a href="{{ route('profile') }}" class="btn-floating red"><i class="large mdi-action-home"></i></a></li>
               @endif
             </ul>
         </div>

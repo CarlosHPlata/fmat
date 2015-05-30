@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Signature;
 use App\Teacher;
 use App\Rating;
+use App\Log;
+use App\Favorite;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
@@ -43,7 +45,7 @@ class TeacherController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(Request $request, Guard $auth)
 	{
 		$teacher = new Teacher();
 		$vars = $request->all();
@@ -55,6 +57,8 @@ class TeacherController extends Controller {
 
 		if ($signatures != null)
 			$teacher->signatures()->sync($signatures);
+
+		$this->log($teacher, $auth->user(), 'create');
 
 		\Session::flash('message', 'Se ha guardado un nuevo maestro: '.$teacher->full_name);
 		return redirect()->route('teacher.show', $teacher);
@@ -91,7 +95,7 @@ class TeacherController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, Request $request, Guard $auth)
 	{
 		$teacher = Teacher::findOrFail($id);
 		$vars = $request->all();
@@ -105,6 +109,8 @@ class TeacherController extends Controller {
 
 		$teacher->save();
 
+		$this->log($teacher, $auth->user(), 'update');
+
 		\Session::flash('message', 'Se han guardado los cambios para: '.$teacher->full_name);
 		return redirect()->route('teacher.show', $teacher);
 	}
@@ -115,11 +121,13 @@ class TeacherController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id, Guard $auth)
 	{
 		$teacher = Teacher::findOrFail($id);
 		$full_name = $teacher->full_name;
 		$teacher->delete();
+
+		$this->log($teacher, $auth->user(), 'delete');
 
 		\Session::flash('message', 'Se ha eliminado el maestro: '.$full_name);
 		return redirect()->route('teacher.index');
@@ -137,6 +145,11 @@ class TeacherController extends Controller {
 				$rating->teacher_id = $teacher;
 				$rating->save();
 
+				$log = new Log();
+				$log->setLog($user, $rating->id, 'App\Rating', 'create', 
+					'calificado maestro : ' . Teacher::find($teacher)->full_name . ' con ' . $rate . ' estrellas');
+				$log->save();
+
 				$msg = 'Gracias por calificar';
 
 			} else $msg = '¿No ya habias calificado a este maestro?';
@@ -145,6 +158,40 @@ class TeacherController extends Controller {
 
 		\Session::flash('message', $msg);
 		return redirect()->back();
+	}
+
+	public function favorite($teacher, Guard $auth){
+		$fav = new Favorite();
+		$user = $auth->user();
+		$teacher = Teacher::findOrFail($teacher);
+
+		$fav->user_id = $user->id;
+		$fav->favoritable_id = $teacher->id;
+		$fav->favoritable_type = 'App\Teacher';
+
+		$fav->save();
+		\Session::flash('message', 'Se ha agregado al maestro: '.$teacher->full_name);
+		return redirect()->back();
+	}
+
+	public function log($teacher, $user, $action){
+		$text = '';
+
+		switch ($action) {
+			case 'create':
+				$text.= 'creado maestro: ' . $teacher->full_name;
+				break;
+			case 'update':
+				$text.= 'actualizado maestro: ' . $teacher->full_name;
+				break;
+			case 'delete':
+				$text.= 'borrado maestro: ' . $teacher->full_name;
+				break;
+		}
+
+		$log = new Log();
+		$log->setLog($user, $teacher->id, 'App\Teacher', $action, $text);
+		$log->save();
 	}
 
 }
