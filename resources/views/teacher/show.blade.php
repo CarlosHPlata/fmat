@@ -77,7 +77,11 @@
             @if (Auth::user()->isLevel('user'))
     			<div class="row">
     				<div class="col-md-12">
-    					<a href="{{ route('teacher.edit', $teacher) }}" style="margin: 0px 48%;"><i class="small mdi-action-favorite-outline"></i></a>
+    					@if ( count( $teacher->favorites()->where('user_id', '=', Auth::user()->id)->get() ) > 0 )
+							<span style="margin: 0px 48%"><i style="color:#ee6e73;" class="small mdi-action-favorite"></i></span>
+    					@else
+    						<a href="{{ route('favorite.teacher', $teacher) }}" style="margin: 0px 48%;"><i style="color:#ee6e73;" class="small mdi-action-favorite-outline"></i></a>
+    					@endif
     				</div>
     			</div>
             @endif
@@ -108,7 +112,7 @@
 														</div>
 														@if ($resource->path)
 															<div >
-																<a href="" class="pull-right"><i class="small mdi-file-file-download"></i></a>
+																<a href="{{ asset('uploads/resources/'.$resource->path) }}" target="_blank" class="pull-right"><i class="small mdi-file-file-download"></i></a>
 															</div>
 														@endif														
 													</td>
@@ -121,7 +125,7 @@
 
 							  		<div class="row" style="padding-top:20px;">
 							  			<div class="col-md-12">
-							  				<a href="" class="pull-right">ver materia...</a>
+							  				<a href="{{ route('signature.show', $signature) }}" class="pull-right">ver materia...</a>
 							  			</div>
 							  		</div>
 							  	</div>
@@ -151,7 +155,7 @@
     								</div>
     								@if ($resource->path)
     									<div >
-    										<a href="" class="pull-right"><i class="small mdi-file-file-download"></i></a>
+    										<a href="{{ asset('uploads/resources/'.$resource->path) }}" target="_blank" class="pull-right"><i class="small mdi-file-file-download"></i></a>
     									</div>
     								@endif														
     							</td>

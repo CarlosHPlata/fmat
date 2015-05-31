@@ -18,11 +18,11 @@ class Resource extends Model {
 
 
 	public function teacher(){
-		return $this->belongsTo('APP\Teacher');
+		return $this->belongsTo('App\Teacher');
 	}
 
 	public function signature(){
-		return $this->belongsTo('APP\Signature');
+		return $this->belongsTo('App\Signature');
 	}
 
 	public function user(){

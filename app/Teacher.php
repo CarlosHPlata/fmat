@@ -25,6 +25,10 @@ class Teacher extends Model {
         return $this->morphMany('App\Comment', 'commentable');
     }
 
+    public function favorites(){
+        return $this->morphMany('App\Favorite', 'favoritable');
+    }
+
 	public function resources()
     {
         return $this->hasMany('App\Resource');

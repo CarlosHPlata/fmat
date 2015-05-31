@@ -26,6 +26,10 @@ class Signature extends Model {
         return $this->hasMany('App\Resource');
     }
 
+    public function favorites(){
+        return $this->morphMany('App\Favorite', 'favoritable');
+    }
+
     public function links(){
         return $this->hasMany('App\Link');
     }

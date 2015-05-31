@@ -29,6 +29,15 @@
 		'uses'	=> 'ProfileController@index'
 	]);
 
+	Route::get('/profile/resources', [
+		'as'	=> 'profile.resources',
+		'uses'	=>	'ProfileController@resources'
+	]);
+
+	Route::get('/profile/favorites', [
+		'as'	=> 'profile.favorites',
+		'uses'  => 'ProfileController@favorites'
+	]);
 
 	Route::get('/rate/{rating}/{teacher}', [
 		'as' 	=> 'rating',

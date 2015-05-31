@@ -6,63 +6,39 @@
 
 @section ('content')
 
-	<div class="row">
-		<div class="card grey darken-3">
-		  <div class="card-content white-text">
-		    	<div class="container">
-		    		<div class="row">
-		    			<div class="col-md-8">
-		    				<h2 class="user-name teal-text text-accent-3">{{ $user->user_name }}</h2>
-		    				<a href="" class="btn">Editar</a>
-		    			</div>
-		    			<div class="col-md-4">
-		    				<h2 class="points teal-text text-accent-3">75</h2>
-		    				<p class="exp">Experiencia</p>
-		    			</div>
-		    		</div>
-		    	</div>
-		  </div>
-
-		  <div class="card-action grey darken-4">
-		    	<div class="container">
-		    		<div class="row links">
-		    			<div class="col-md-4 pull-right">
-		    				<a href="" class="white-text"><i class="mdi-editor-attach-file"></i> Aportaciones</a>
-		    				<a href="" class="white-text"><i class="mdi-action-favorite"></i> Favoritos</a>
-		    				<a href="" class="white-text"><i class="mdi-content-flag"></i> Reportes</a>
-		    			</div>
-		    		</div>
-		    	</div>
-		  </div>
-		</div>
-	</div>
-
 	<div class="container">
 		<div class="row">	
 			<div class="card content white">
 				<div class="card-content">
-					<table class="table">
-						<thead>
-							<th>Actividad</th>
-							<th>Fecha</th>
-							<th>Ir</th>
-						</thead>
-
-						<tbody>
-							@foreach ($user->logs as $log)
-								<tr>
-									<td>{{ $log->text }}</td>
-									<td>{{ $log->updated_at }}</td>
-									<td>
-										@if ($log->is_link_valid && $log->action != 'delete')
-											<a href="{{ $log->link }}"><i class="mdi-content-link"></i></a>
-										@endif
-									</td>
-								</tr>
-							@endforeach
-						</tbody>
-
-					</table>
+					<h4>Tus recursos</h4>
+					<a href="{{ route('resource.create') }}" class="waves-effect waves-light btn"><i class="mdi-file-cloud left"></i>Compartir Recurso</a>
+	    	  		<table class="table">
+	    	  			<thead>
+	    	  				<th>Recursos</th>
+	    	  			</thead>
+	    	  			<tbody>
+	    	  				@foreach ($user->resources as $resource)
+	    						<tr>
+	    							<td>
+	    								<div>
+	    									<i class="{{ $resource->type == 'work'?'mdi-action-receipt':'mdi-action-description' }} tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ $resource->type == 'work'?'tarea':'examen' }}"></i> 
+	    									{{$resource->name}}
+	    									<span class="pull-right"> <a href="{{ route('signature.show', $resource->signature) }}"><i class="mdi-action-class"></i> </a></span>
+	    									<span class="pull-right"> <a href="{{ route('teacher.show', $resource->teacher) }}"><i class="mdi-social-school"></i> </a></span>
+	    								</div>
+	    								<div>
+	    									{{ $resource->description }}
+	    								</div>
+	    								@if ($resource->path)
+	    									<div >
+	    										<a href="{{ asset('uploads/resources/'.$resource->path) }}" target="_blank" class="pull-right"><i class="small mdi-file-file-download"></i></a>
+	    									</div>
+	    								@endif														
+	    							</td>
+	    						</tr>
+	    	  				@endforeach
+	    	  			</tbody>
+	    	  		</table>
 				</div>
 			</div>
 		</div>

@@ -161,17 +161,22 @@ class TeacherController extends Controller {
 	}
 
 	public function favorite($teacher, Guard $auth){
-		$fav = new Favorite();
-		$user = $auth->user();
-		$teacher = Teacher::findOrFail($teacher);
+		if (count( $teacher->favorites()->where('user_id','=', $auth->user()->id)->get() ) > 0){
+			\Session::flash('message', 'No ya habias agregado este maestro?');
+			return redirect()->back();
+		} else {
+			$fav = new Favorite();
+			$user = $auth->user();
+			$teacher = Teacher::findOrFail($teacher);
 
-		$fav->user_id = $user->id;
-		$fav->favoritable_id = $teacher->id;
-		$fav->favoritable_type = 'App\Teacher';
+			$fav->user_id = $user->id;
+			$fav->favoritable_id = $teacher->id;
+			$fav->favoritable_type = 'App\Teacher';
 
-		$fav->save();
-		\Session::flash('message', 'Se ha agregado al maestro: '.$teacher->full_name);
-		return redirect()->back();
+			$fav->save();
+			\Session::flash('message', 'Se ha agregado al maestro: '.$teacher->full_name.' a tus favoritos');
+			return redirect()->back();
+		}
 	}
 
 	public function log($teacher, $user, $action){

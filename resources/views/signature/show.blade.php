@@ -41,6 +41,20 @@
 	        @endif
 	        @endif
 
+	        @if (!Auth::guest())
+            @if (Auth::user()->isLevel('user'))
+    			<div class="row">
+    				<div class="col-md-12">
+    					@if ( count( $signature->favorites()->where('user_id', '=', Auth::user()->id)->get() ) > 0 )
+							<span style="margin: 0px 48%"><i style="color:#ee6e73;" class="small mdi-action-favorite"></i></span>
+    					@else
+    						<a href="{{ route('favorite.signature', $signature) }}" style="margin: 0px 48%;"><i style="color:#ee6e73;" class="small mdi-action-favorite-outline"></i></a>
+    					@endif
+    				</div>
+    			</div>
+            @endif
+            @endif
+
 	        <div class="row">
 	        	<div class="col-md-12">
 	        		{{ $signature->description }}
@@ -72,7 +86,7 @@
 														</div>
 														@if ($resource->path)
 															<div >
-																<a href="" class="pull-right"><i class="small mdi-file-file-download"></i></a>
+																<a href="{{ asset('uploads/resources/'.$resource->path) }}" target="_blank" class="pull-right"><i class="small mdi-file-file-download"></i></a>
 															</div>
 														@endif														
 													</td>
@@ -115,7 +129,7 @@
     								</div>
     								@if ($resource->path)
     									<div >
-    										<a href="" class="pull-right"><i class="small mdi-file-file-download"></i></a>
+    										<a href="{{ asset('uploads/resources/'.$resource->path) }}" target="_blank" class="pull-right"><i class="small mdi-file-file-download"></i></a>
     									</div>
     								@endif														
     							</td>

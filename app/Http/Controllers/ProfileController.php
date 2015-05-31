@@ -7,6 +7,9 @@ use Illuminate\Contracts\Auth\Guard;
 
 use Illuminate\Http\Request;
 
+use App\Signature;
+use App\Teacher;
+
 class ProfileController extends Controller {
 
 	protected $auth;
@@ -29,7 +32,28 @@ class ProfileController extends Controller {
 
 	public function resources(){
 		$user = $this->auth->user();
-		return view('profile.resources', $user);
+		return view('profile.resources', compact('user'));
+	}
+
+	public function favorites(){
+		$user = $this->auth->user();
+
+		$signaturesfav = $user->favorites()->where('favoritable_type','=', 'App\Signature')->get();
+		$signatures = array();
+
+		foreach ($signaturesfav as $fav) {
+			$signatures[] = Signature::findOrFail($fav->favoritable_id);
+		}
+
+		$teachersfav = $user->favorites()->where('favoritable_type','=', 'App\Teacher')->get();
+		$teachers = array();
+
+		foreach ($teachersfav as $fav) {
+			$teachers[] = Teacher::findOrFail($fav->favoritable_id);
+		}
+
+		//return dd($teachers, $signatures);
+		return view('profile.favorites', compact('user', 'signatures', 'teachers'));
 	}
 
 	/**

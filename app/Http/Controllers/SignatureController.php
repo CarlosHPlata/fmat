@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Signature;
 use App\Teacher;
 use App\Log;
-use App\Signature;
+use App\Favorite;
 
 class SignatureController extends Controller {
 
@@ -136,17 +136,22 @@ class SignatureController extends Controller {
 	}
 
 	public function favorite($signature, Guard $auth){
-		$fav = new Favorite();
-		$user = $auth->user();
-		$signature = Signature::findOrFail($signature);
+		if (count( $signature->favorites()->where('user_id','=', $auth->user()->id)->get() ) > 0){
+			\Session::flash('message', 'No ya habias agregado esta asignatura?');
+			return redirect()->back();
+		} else {
+			$fav = new Favorite();
+			$user = $auth->user();
+			$signature = Signature::findOrFail($signature);
 
-		$fav->user_id = $user->id;
-		$fav->favoritable_id = $signature->id;
-		$fav->favoritable_type = 'App\Signature';
+			$fav->user_id = $user->id;
+			$fav->favoritable_id = $signature->id;
+			$fav->favoritable_type = 'App\Signature';
 
-		$fav->save();
-		\Session::flash('message', 'Se ha agregado la materia: '.$signature->name.' a tus favoritos');
-		return redirect()->back();
+			$fav->save();
+			\Session::flash('message', 'Se ha agregado la materia: '.$signature->name.' a tus favoritos');
+			return redirect()->back();
+		}
 	}
 
 	public function log($signature, $action){
