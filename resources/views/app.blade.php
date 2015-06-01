@@ -33,14 +33,26 @@
 				@yield('content')
 			</div>
 			<div class="col-md-2">
-				<ul class="section table-of-contents" style="position: fixed;">
-	            	<li><a href="#introduction" class="">Introducción</a></li>
-	            	<li><a href="#structure" class="active">Structure</a></li>
-	            	<li><a href="#initialization">Intialization</a></li>
-	            	<li><a href="#options">Plugin Options</a></li>
-	            	<li><a href="#method">Methods</a></li>
-	            	<li><a href="#variations">Variations</a></li>
-	          </ul>
+				@if (!Auth::guest())
+					<ul class="section table-of-contents" style="position: fixed;">
+						@if (count(Auth::user()->favorites()) < 15)
+							<span>Materias favoritas:</span>
+							@foreach(Auth::user()->favorites()->where('favoritable_type','=', 'App\Signature')->get() as $fav)
+								<li><a href="{{ route( 'signature.show',$fav->favoritable_id ) }}" class="">
+									{{App\Signature::findOrFail($fav->favoritable_id)->name}}
+								</a></li>
+							@endforeach
+							<span>Maestros favoritos: </span>
+							@foreach(Auth::user()->favorites()->where('favoritable_type','=', 'App\Teacher')->get() as $fav)
+								<li><a href="{{ route( 'teacher.show',$fav->favoritable_id ) }}" class="">
+									{{App\Teacher::findOrFail($fav->favoritable_id)->full_name}}
+								</a></li>
+							@endforeach
+						@else
+							<li><a href="{{ route( 'profile.favorites') }}" class="">Favoritos</a></li>
+						@endif
+		          	</ul>
+				@endif
 			</div>
 		</div>
 	</div>
