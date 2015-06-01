@@ -28,6 +28,8 @@
 		<span class="brown-text text-lighten-1">Comentarios</span>
 
 		@include('comments.partials.commentform')
+		<input type="hidden" id="type" value="App\Bulletin">
+		<input type="hidden" id="id" value="{{ $bulletin->id }}">
 
 		@foreach ($bulletin->comments()->orderBy('created_at', 'DESC')->get() as $comment)
 			@include('comments.partials.commentaries')
@@ -40,6 +42,7 @@
 @section('scripts')
 	<script type="text/javascript" src="{{ asset('js/teacher/show.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/comments/jquery.timeago.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/comments/comment.js') }}"></script>
 	<script type="text/javascript">
 		$(function(){
 			jQuery("abbr.timeago").timeago();

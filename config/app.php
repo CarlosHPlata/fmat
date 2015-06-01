@@ -154,6 +154,11 @@ return [
 		 * Dependencies Service Providers...
 		 */
 		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+
+		/*
+		*	DataTables service provideers
+		*/
+		'yajra\Datatables\DatatablesServiceProvider',
 	],
 
 	/*
@@ -208,6 +213,12 @@ return [
 
 		'Form' => 'Collective\Html\FormFacade',
 		'Html' => 'Collective\Html\HtmlFacade',
+
+		/*
+		* DataTables Aliases ...
+		*/
+
+		'Datatables' => 'yajra\Datatables\Datatables',
 
 	],
 

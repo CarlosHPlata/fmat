@@ -8,6 +8,11 @@
           <li><a href="{{ route('signature.index') }}" class="teal-text text-lighten-1">Materias</a></li>
          	<li><a href="{{ route('teacher.index') }}" class="teal-text text-lighten-1">Maestros</a></li>
           <li><a href="{{ route('bulletin.index') }}" class="teal-text text-lighten-1">Noticias</a></li>
+          @if (!Auth::guest())
+          @if (Auth::user()->isLevel('admin'))
+              <li><a href="{{ route('user.index') }}" class="teal-text text-lighten-1">Usuarios</a></li>
+          @endif
+          @endif
           <li class="find">
             {!!Form::open(['method' => 'post', 'action' => 'SearchesController@search'])!!}
               <div class="input-field">
@@ -22,6 +27,11 @@
             <li><a href="{{ route('signature.index') }}" class="teal-text text-accent-4" >Materias</a></li>
           	<li><a href="{{ route('teacher.index') }}" class="teal-text text-accent-4" >Maestros</a></li>
             <li><a href="{{ route('bulletin.index') }}" class="teal-text text-accent-4" >Noticias</a></li>
+            @if (!Auth::guest())
+            @if (Auth::user()->isLevel('admin'))
+              <li><a href="{{ route('user.index') }}" class="teal-text text-accent-4">Usuarios</a></li>
+            @endif
+            @endif
           	<li>
           		{!!Form::open(['method' => 'post', 'action' => 'SearchesController@search'])!!}
           		    <div class="input-field">

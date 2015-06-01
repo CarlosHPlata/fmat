@@ -6,7 +6,7 @@ use App\Teacher;
 
 class Comment extends Model {
 
-	protected $fillable = ['comment'];
+	protected $fillable = ['comment', 'anonymous'];
 
 	public function commentable() {
 		return $this->morphTo();

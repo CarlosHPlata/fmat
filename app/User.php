@@ -6,6 +6,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Report;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -29,6 +30,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function logs(){
 		return $this->hasMany('App\Log');
+	}
+
+	public function reports(){
+		return $this->hasMany('App\Report');
 	}
 
 	public function setPasswordAttribute($value){
@@ -63,6 +68,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 
 		return false;
+	}
+
+	public function getReportsAdminAttribute(){
+		if ( $this->isLevel('admin') ){
+			return Report::where('admin_id', '=', $this->id)->get();
+		}
 	}
 
 }

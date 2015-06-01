@@ -38,3 +38,13 @@
 	</div>
 
 @endsection
+
+@section ('scripts')
+	<script type="text/javascript">
+		$('.modal-trigger').click(function(){
+			$('#reason').val('este es un comentario');
+			$('#url').val($(this).attr('data-route'));
+			$('#modal1').openModal();
+		});
+	</script>
+@endsection

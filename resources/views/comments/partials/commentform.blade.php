@@ -2,9 +2,10 @@
 	<div class="row">
 		<div class="widget-area no-padding blank">
 			<div class="status-upload">
-				{!! Form::open(array('url' => 'foo/bar')) !!}
+				<input type="hidden" id="url" value="{{ route('comment.store') }}">
+				{!! Form::open(array('url' => 'foo/bar', 'method' => 'POST', 'id' => 'form-comment')) !!}
 					<div class="textarea-box">
-						<textarea id="textarea1" name="comment" length="255" placeholder="Publica un comentario"></textarea>
+						<textarea id="comment" name="comment" length="255" placeholder="Publica un comentario"></textarea>
 					</div>
 					<ul style="  padding-top: 10px;">
 						<input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" name="anonymous" />

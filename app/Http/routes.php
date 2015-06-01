@@ -24,6 +24,15 @@
 
 	Route::resource('resource', 'ResourceController');
 
+	Route::resource('user', 'UserController');
+
+	Route::resource('comment', 'CommentController');
+
+	Route::post('/report/{user}', [
+		'as'	=> 'report',
+		'uses'	=> 'UserController@report'
+	]);
+
 	Route::get('/profile', [
 		'as'	=> 'profile',
 		'uses'	=> 'ProfileController@index'
@@ -37,6 +46,11 @@
 	Route::get('/profile/favorites', [
 		'as'	=> 'profile.favorites',
 		'uses'  => 'ProfileController@favorites'
+	]);
+
+	Route::get('/profile/reports', [
+		'as'	=> 'profile.reports',
+		'uses'	=> 'ProfileController@reports'
 	]);
 
 	Route::get('/rate/{rating}/{teacher}', [
@@ -57,6 +71,11 @@
 	Route::post('/resource/remove/{resource}', [
 		'as'	=> 'resource.remove.file',
 		'uses'	=> 'ResourceController@removeFile'
+	]);
+
+	Route::get('/data/users', [
+		'as'	=> 'data.users',
+		'uses'  => 'UserController@data'
 	]);
 
 
