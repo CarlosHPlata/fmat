@@ -60,11 +60,10 @@ function draw_calendar($month,$year){
 			$fecha= DateTime::createFromFormat("d/m/Y", $dia);
 
 			foreach ($eventos as $evento) {
-				echo $evento->eventDay.'     '.$fecha;
 
-				if ($evento->eventDay==$fecha) {
+				if ($evento->eventDay==$fecha->format("Y-m-d") {
 
-					$calendar.='<p>'.$eventContent->eventDay.'</p>';
+					$calendar.='<p>'.$evento->eventContent.'</p>';
 				}
 				
 			}
