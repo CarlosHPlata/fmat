@@ -28,10 +28,13 @@
 						</tbody>
 					</table>
 					<div style="font-size: 13pt;   text-align: center;">
-						<a class="btn-floating waves-effect waves-light teal accent-4" href="{{ route('user.edit', $user) }}"><i class="mdi-editor-mode-edit"></i></a>
-						<a class="btn-floating waves-effect waves-light yellow darken-3 modal-trigger" href="#modal1"><i class="mdi-content-flag"></i></a>
-						<a class="btn-floating waves-effect waves-light red" href=""><i class="mdi-content-report"></i></a>
+						<a class="btn-floating waves-effect waves-light teal accent-4 tooltipped" data-position="top" data-delay="50" data-tooltip="Editar" href="{{ route('user.edit', $user) }}"><i class="mdi-editor-mode-edit"></i></a>
+						<a class="btn-floating waves-effect waves-light yellow darken-3 modal-trigger tooltipped" data-position="top" data-delay="50" data-tooltip="Reportar" href="#modal1"><i class="mdi-content-flag"></i></a>
+						{!! Form::open(array('url' => route('user.destroy', $user), 'method' => 'DELETE')) !!}
+							<button class="btn-floating waves-effect waves-light red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Bann Hammer"><i class="mdi-content-report"></i></button>
+						{!! Form::close() !!}
 					</div>
+
 				</div>
 			</div>
 		</div>

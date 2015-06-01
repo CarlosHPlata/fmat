@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateResourceRequest;
 
 use App\Resource;
 use App\User;
@@ -39,7 +40,7 @@ class ResourceController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request, Guard $auth)
+	public function store(CreateResourceRequest $request, Guard $auth)
 	{
 		$resource = new Resource();
 		$user =  $auth->user();
@@ -64,10 +65,10 @@ class ResourceController extends Controller {
 			$resource->save();
 		}
 
-		$resource->delete($resource, $auth->user(), 'create');
+		$this->log($resource, $auth->user(), 'create');
 
 		\Session::flash('message', 'Se ha subido su recurso con exito');
-		return redirect()->route('resource.show', $resource);
+		return redirect()->back();
 		
 	}
 
@@ -93,7 +94,7 @@ class ResourceController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, Request $request, Guard $auth)
+	public function update($id, CreateResourceRequest $request, Guard $auth)
 	{ 
 		$resource = Resource::findOrFail($id);
 		$user =  $auth->user();
@@ -118,7 +119,9 @@ class ResourceController extends Controller {
 			$resource->save();
 		}
 
-		$resource->delete($resource, $auth->user(), 'update');
+		$this->log($resource, $auth->user(), 'update');
+
+		return redirect()->back();
 	}
 
 	/**
@@ -135,7 +138,7 @@ class ResourceController extends Controller {
 			\File::delete($this->DESTINATION_PATH . $resource->path);
 		}
 
-		$this->log();
+		$this->log($resource, $auth->user, 'delete');
 
 		$resource->delete($resource, $auth->user(), 'delete');
 

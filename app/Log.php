@@ -8,6 +8,7 @@ use App\Teacher;
 use App\Resource;
 use App\Rating;
 use App\User;
+use App\Comment;
 
 class Log extends Model {
 
@@ -45,6 +46,9 @@ class Log extends Model {
 				case 'App\Rating':
 					$result = Rating::findOrFail($this->logueable_id);
 					break;
+				case 'App\Comment':
+					$result = Comment::findOrFail($this->logueable_id);
+					break;
 			}
 			return true;
 		} catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
@@ -69,11 +73,20 @@ class Log extends Model {
 				break;
 			case 'App\Resource':
 				$result = Resource::findOrFail($this->logueable_id);
-				return route('resource.show', $result);
+				return route('teacher.show', $result->teacher);
 				break;
 			case 'App\Rating':
 				$result = Rating::findOrFail($this->logueable_id);
 				return route('teacher.show', $result->teacher);
+				break;
+			case 'App\Comment':
+				$result = Comment::findOrFail($this->logueable_id);
+				if($result->commentable_type = 'App\Teacher')
+					return route('teacher.show', $result->commentable_id);
+				if($result->commentable_type = 'App\Bulletin')
+					return route('bulletin.show', $result->commentable_id);
+				if($result->commentable_type = 'App\Signature')
+					return route('signature.show', $result->commentable_id);
 				break;
 		}
 		

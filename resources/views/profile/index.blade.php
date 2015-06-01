@@ -20,7 +20,7 @@
 						<tbody>
 							@foreach ($user->logs as $log)
 								<tr>
-									<td>{{ $log->text }}</td>
+									<td>{!! $log->text !!}</td>
 									<td>{{ $log->updated_at }}</td>
 									<td>
 										@if ($log->is_link_valid && $log->action != 'delete')

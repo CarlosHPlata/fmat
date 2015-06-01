@@ -9,6 +9,9 @@ use App\Teacher;
 use App\Log;
 use App\Favorite;
 
+use App\Http\Requests\CreateSignatureRequest;
+use App\Http\Requests\UpdateSignatureRequest;
+
 class SignatureController extends Controller {
 
 	protected $auth;
@@ -46,7 +49,7 @@ class SignatureController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(CreateSignatureRequest $request)
 	{
 		$signature = new Signature();
 		$vars = $request->all();
@@ -96,7 +99,7 @@ class SignatureController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id,Request $request)
+	public function update($id, UpdateSignatureRequest $request)
 	{
 		$signature = Signature::findOrFail($id);
 		$vars = $request->all();

@@ -4,7 +4,7 @@
 
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
-	
+			@include ('errors')
 			{!! Form::open([ 'route' => 'resource.store', 'method' => 'POST', 'files' => true]) !!}
 
 				<div class="row">

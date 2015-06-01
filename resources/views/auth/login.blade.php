@@ -22,34 +22,34 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+							<div class="input-field col-md-10 col-md-offset-1">
+								{!! Form::text('email', old('email')) !!}
+								{!! Form::label('email', 'User Name or E-Mail Address') !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
+							<div class="input-field col-md-10 col-md-offset-1">
+								{!! Form::password('password') !!}
+								{!! Form::label('password', 'Password') !!}
 							</div>
 						</div>
 
 						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
+							<div class="col-md-10 col-md-offset-1">
 								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="remember"> Remember Me
-									</label>
+									<input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" name="remember" />
+									<label for="filled-in-box">Remember Me</label>
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
+							<div class="col-md-10 col-md-offset-1">
 								<button type="submit" class="btn btn-primary">Login</button>
 
 								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
+								<a class="btn btn-link pull-right" href="{{ route('user.create') }}">Registrate</a>
 							</div>
 						</div>
 					</form>

@@ -8,6 +8,7 @@
 
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
+			@include ('errors')
 			{!! Form::open(array('route' => 'signature.store', 'method' => 'post')) !!}
 				
 				<h4>Informació basica</h4>

@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Carbon\Carbon;
 
 use App\Comment;
+use App\Log;
 
 class CommentController extends Controller {
 
@@ -56,6 +57,8 @@ class CommentController extends Controller {
 
 		$comment->save();
 
+		$this->log($comment, $auth->user(), 'create');
+
 		return $comment->id;
 	}
 
@@ -102,6 +105,8 @@ class CommentController extends Controller {
 
 		$comment->save();
 
+		$this->log($comment, $auth->user(), 'update');
+
 		return $comment->id;
 	}
 
@@ -111,12 +116,34 @@ class CommentController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id, Guard $auth)
 	{
 		$comment = Comment::findOrFail($id);
 		$comment->delete();
 
+		$this->log($comment, $auth->user(), 'delete');
+
 		return 'true';
+	}
+
+	public function log($comment, $user, $action){
+		$text = '';
+
+		switch ($action) {
+			case 'create':
+				$text.= 'has comentado una pagina con: <br>'.$comment->comment;
+				break;
+			case 'update':
+				$text.= 'has actualizado un comentairo';
+				break;
+			case 'delete':
+				$text.= 'has borrado un comentario';
+				break;
+		}
+
+		$log = new Log();
+		$log->setLog($user, $comment->id, 'App\Comment', $action, $text);
+		$log->save();
 	}
 
 }

@@ -8,6 +8,7 @@
 
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
+			@include ('errors')
 			{!! Form::model($signature, array('route' => ['signature.update', $signature], 'method' => 'put')) !!}
 				
 				<h4>Informació basica</h4>

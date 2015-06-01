@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\EditUserRequest;
 
 use App\User;
 
@@ -54,7 +56,7 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('user.create');
 	}
 
 	/**
@@ -62,9 +64,21 @@ class UserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateUserRequest $request, Guard $auth)
 	{
-		//
+		$user = new User();
+		$user->fill($request->all());
+
+		if (!$request->has('type')){
+			$user->type = 'user';
+		}
+
+		$user->save();
+
+		if (!$auth->guest() && $auth->user()->isLevel('admin'))
+			return redirect()->route('user.index');
+		else
+			return redirect('auth/login');
 	}
 
 	/**
@@ -87,7 +101,8 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$user = User::findOrFail($id);
+		return view('user.edit', compact('user'));
 	}
 
 	/**
@@ -96,9 +111,21 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, EditUserRequest $request, Guard $auth)
 	{
-		//
+		$user = User::findOrFail($id);
+		$user->fill($request->all());
+
+		if (!$request->has('type')){
+			$user->type = 'user';
+		}
+
+		$user->save();
+
+		if (!$auth->guest() && $auth->user()->isLevel('admin'))
+			return redirect()->route('user.index');
+		else
+			return redirect()->route('profile');
 	}
 
 	/**
@@ -132,7 +159,7 @@ class UserController extends Controller {
 				$data[] = array(
 					'nombreusuario'		=> $user->user_name,
 					'nombre'			=> $user->full_name,
-					'puntos'			=> 'lol',
+					'puntos'			=> $user->points,
 					'actividad'			=> count($user->logs),
 					'reportes'			=> count($user->reports),
 					'acciones'			=> view('user.partials.actions', compact('user'))->render(),

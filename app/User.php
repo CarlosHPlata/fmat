@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Report;
+use App\Log;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
@@ -52,6 +53,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function resources(){
 		return $this->hasMany('App\Resource');
+	}
+
+	public function getPointsAttribute(){
+		$rate = Log::where('user_id', '=', $this->id)
+					->where('logueable_type', '=', 'App\Rating')
+					->where('action', '=', 'create')
+					->get();
+
+		$resource = Log::where('user_id', '=', $this->id)
+					->where('logueable_type', '=', 'App\Resource')
+					->where('action', '=', 'create')
+					->get();
+
+		$comments = Log::where('user_id', '=', $this->id)
+					->where('logueable_type', '=', 'App\Comment')
+					->where('action', '=', 'create')
+					->get();
+
+		$ponts = (count($rate)*2) + (count($resource)*10 + count($comments)*1);
+
+		return $ponts;
+
 	}
 
 	public function isLevel($level){

@@ -6,7 +6,8 @@
 
 @section ('content')
 	
-	<div class="table-responsive white">
+	<div class="table-responsive white" style="margin-top:50px;">
+        <a href="{{ route('user.create') }}" class="waves-effect waves-light btn" style="margin:5px;">Crear usuario</a>
         <table class="table table-striped m-b-none" id="datatables">
             <thead>
             <tr>

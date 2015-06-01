@@ -4,7 +4,7 @@
 
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
-	
+			@include ('errors')
 			{!! Form::model($resource, [ 'route' => ['resource.update', $resource], 'method' => 'PUT', 'files' => true]) !!}
 
 				<div class="row">

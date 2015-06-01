@@ -28,6 +28,8 @@
 	    								</div>
 	    								<div>
 	    									{{ $resource->description }}
+	    									<br>
+	    									<a href="{{ route('resource.edit', $resource) }}">Editar</a>
 	    								</div>
 	    								@if ($resource->path)
 	    									<div >

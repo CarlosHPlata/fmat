@@ -9,6 +9,8 @@ use Illuminate\Contracts\Auth\Guard;
 use App\Bulletin;
 use Carbon\Carbon;
 
+use App\Http\Requests\CreateBulletinRequest;
+
 class BulletinController extends Controller {
 
 	public function __construct(){
@@ -42,7 +44,7 @@ class BulletinController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request, Guard $auth)
+	public function store(CreateBulletinRequest $request, Guard $auth)
 	{
 		if(!$auth->guest()){
 			$bulletin = new Bulletin();
@@ -90,7 +92,7 @@ class BulletinController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, CreateBulletinRequest $request)
 	{
 		$bulletin = Bulletin::findOrFail($id);
 		$vars = $request->all();

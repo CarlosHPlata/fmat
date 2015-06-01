@@ -11,6 +11,8 @@ use App\Favorite;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\CreateTeacherRequest;
+
 class TeacherController extends Controller {
 
 	public function __construct(){
@@ -45,7 +47,7 @@ class TeacherController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request, Guard $auth)
+	public function store(CreateTeacherRequest $request, Guard $auth)
 	{
 		$teacher = new Teacher();
 		$vars = $request->all();
@@ -95,7 +97,7 @@ class TeacherController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, Request $request, Guard $auth)
+	public function update($id, CreateTeacherRequest $request, Guard $auth)
 	{
 		$teacher = Teacher::findOrFail($id);
 		$vars = $request->all();

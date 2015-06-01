@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>LIS WIKI</title>
 
 	
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
@@ -34,10 +34,10 @@
 		    		<div class="row">
 		    			<div class="col-md-8">
 		    				<a href="{{ route('profile') }}"><h2 class="user-name teal-text text-accent-3">{{ $user->user_name }}</h2></a>
-		    				<a href="" class="btn">Editar</a>
+		    				<a href="{{ route('user.edit', $user)}}" class="btn">Editar</a>
 		    			</div>
 		    			<div class="col-md-4">
-		    				<h2 class="points teal-text text-accent-3">75</h2>
+		    				<h2 class="points teal-text text-accent-3">{{ $user->points }}</h2>
 		    				<p class="exp">Experiencia</p>
 		    			</div>
 		    		</div>

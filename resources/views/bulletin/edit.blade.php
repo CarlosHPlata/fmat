@@ -4,6 +4,7 @@
 	
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
+			@include ('errors')
 			{!! Form::model($bulletin, ['route' => ['bulletin.update', $bulletin], 'method' => 'put']) !!}
 					
 					@include ('bulletin.partials.bulletinfields')

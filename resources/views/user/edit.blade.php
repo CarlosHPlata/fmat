@@ -5,18 +5,13 @@
 @endsection
 
 @section('content')
-	
+
 	<div class="row card" style="padding-top:40px; overflow: visible;">
 		<div class="col-md-12">
-			@include ('errors')
-			{!! Form::open( array('route' => 'teacher.store', 'method' => 'POST')) !!}
-				
-				<h4>Informació basica</h4>
-				@include ('teacher.partials.teacherfields')
+			@include('errors')
+			{!! Form::model($user, array('route' => ['user.update', $user], 'method' => 'put')) !!}
 
-				<hr>
-				<h4>Materias</h4>
-				@include ('teacher.partials.signaturesfields')
+				@include ('user.partials.userfields')
 
 				<div class="row">
 					<div class="col-md-5 pull-right">
@@ -35,7 +30,7 @@
 @section ('scripts')
 	<script type="text/javascript">
 		$(document).ready(function() {
-		    $('#multiple-select-box').selectivity();
-		});
+		    $('select').material_select();
+		  });
 	</script>
 @endsection
