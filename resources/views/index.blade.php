@@ -23,6 +23,14 @@
 	</div>
 
 	<section>
+		<div class="card white">
+			<div class="card-content">
+				aqui el calendario
+			</div>
+		</div>
+	</section>
+
+	<section>
 		<hr>
 		<h4>Noticias</h4>
 		
@@ -49,7 +57,7 @@
 		@endforeach
 
 		<div>
-			<span class="pull-right"><a href="">Ver mas</a></span> <br>
+			<span class="pull-right"><a href="{{route('bulletin.index')}}">Ver mas</a></span> <br>
 			<hr>
 		</div>
 	</section>
