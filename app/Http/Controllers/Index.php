@@ -19,7 +19,7 @@ class Index extends Controller {
 	 */
 	public function index()
 	{
-		$bulletins = Bulletin::take(3)->orderBy('date', 'DESC')->get();
+		$bulletins = Bulletin::lastest()->take(3)->get();
 		$teachers = $this->getBestTeachers();
 		$signatures = $this->getBestSignatures();
 

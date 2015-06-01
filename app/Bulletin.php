@@ -29,4 +29,9 @@ class Bulletin extends Model {
     	$this->attributes['date'] = date_format($date, 'Y-m-d');
     }
 
+    public function scopeLastest($query)
+    {
+      return $query->orderBy('date', 'desc');
+    }
+
 }

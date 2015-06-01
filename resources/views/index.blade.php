@@ -33,7 +33,7 @@
 	<section>
 		<hr>
 		<h4>Noticias</h4>
-		
+
 		@foreach ($bulletins as $bulletin)
 			<div class="card white">
 				<div class="card-content">
@@ -46,14 +46,14 @@
 				<div class="card-action" style="padding:10px">
 					<div class="row" style="margin-bottom: 0">
 						<div class="col-md-6">
-							<a href="">Ver mas...</a>
+							<a href="{{route('bulletin.show', $bulletin->id )}}">Ver mas...</a>
 						</div>
 						<div class="col-md-6">
 							<span class="pull-right">{{ count($bulletin->comments) }} <i class="mdi-editor-mode-comment"></i></span>
 						</div>
 					</div>
 				</div>
-			</div>	
+			</div>
 		@endforeach
 
 		<div>
@@ -62,7 +62,7 @@
 		</div>
 	</section>
 
-	
+
 
 	<div class="row">
 		<div class="col-md-6">
@@ -72,13 +72,13 @@
 					<p>
 						<ul class="collection">
 							@foreach ($teachers as $teacher)
-								<a class="collection-item" href="{{ route('teacher.show', $teacher) }}"> 
-									<div> 
+								<a class="collection-item" href="{{ route('teacher.show', $teacher) }}">
+									<div>
 										{{ $teacher->full_name }}
 										<span class="secondary-content">
 											{{$teacher->rating}}<i class="mdi-action-grade"></i>
 										</span>
-									</div> 
+									</div>
 								</a>
 							@endforeach
 						</ul>
@@ -93,13 +93,13 @@
 					<p>
 						<ul class="collection">
 							@foreach ($signatures as $signature)
-								<a class="collection-item" href="{{ route('signature.show', $signature) }}"> 
-									<div> 
+								<a class="collection-item" href="{{ route('signature.show', $signature) }}">
+									<div>
 										{{ $signature->name }}
 										<span href="#!" class="secondary-content">
 										 	{{ count($signature->resources) }}<i class="mdi-editor-attach-file"></i>
 										</span>
-									</div> 
+									</div>
 								</a>
 							@endforeach
 						</ul>
