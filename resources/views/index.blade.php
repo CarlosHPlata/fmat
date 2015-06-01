@@ -61,7 +61,7 @@ function draw_calendar($month,$year){
 
 			foreach ($eventos as $evento) {
 
-				if ($evento->eventDay==$fecha->format("Y-m-d") {
+				if ($evento->eventDay==$fecha->format("Y-m-d")) {
 
 					$calendar.='<p>'.$evento->eventContent.'</p>';
 				}
