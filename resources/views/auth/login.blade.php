@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
@@ -49,13 +48,15 @@
 								<button type="submit" class="btn btn-primary">Login</button>
 
 								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
-								<a class="btn btn-link pull-right" href="{{ route('user.create') }}">Registrate</a>
+								
 							</div>
+						</div>
+						<div class="row">
+							<a class="btn btn-link" style="width:100%;" href="{{ route('user.create') }}">Registrate</a>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 @endsection

@@ -47,7 +47,7 @@
 		  <div class="card-action grey darken-4">
 		    	<div class="container">
 		    		<div class="row links">
-		    			<div class="col-md-4 pull-right">
+		    			<div class="col-md-6 pull-right">
 		    				<a href="{{ route('profile.resources') }}" class="white-text"><i class="mdi-editor-attach-file"></i> Aportaciones</a>
 		    				<a href="{{ route('profile.favorites') }}" class="white-text"><i class="mdi-action-favorite"></i> Favoritos</a>
 		    				<a href="{{ route('profile.reports') }}" class="white-text"><i class="mdi-content-flag"></i> Reportes</a>
